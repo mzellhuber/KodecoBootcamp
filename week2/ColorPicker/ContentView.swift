@@ -32,55 +32,124 @@
 
 import SwiftUI
 
+struct ColorSliderView: View {
+  var colorName: String
+  @Binding var colorValue: Double
+  
+  var body: some View {
+    VStack {
+      Text(colorName)
+      HStack {
+        Slider(value: $colorValue, in: 0...255)
+        Text("\(Int(colorValue.rounded()))")
+      }
+    }
+  }
+}
+
+struct TitleAndRectangleView: View {
+  var foregroundColor: Color
+  
+  var body: some View {
+    VStack {
+      Text("Color Picker")
+        .font(.largeTitle)
+      
+      RoundedRectangle(cornerRadius: 0)
+        .foregroundColor(foregroundColor)
+        .border(Color.primary)
+        .aspectRatio(1.0, contentMode: .fit)
+    }
+  }
+}
+
+struct SliderAndButtonView: View {
+  @Binding var redColor: Double
+  @Binding var greenColor: Double
+  @Binding var blueColor: Double
+  var setColor: () -> Void
+  
+  var body: some View {
+    VStack {
+      ColorSliderView(colorName: "Red", colorValue: $redColor)
+      ColorSliderView(colorName: "Green", colorValue: $greenColor)
+      ColorSliderView(colorName: "Blue", colorValue: $blueColor)
+      
+      SetColorButtonView(action: setColor)
+    }
+    .padding(.horizontal)
+  }
+}
+
+struct SetColorButtonView: View {
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text("Set Color")
+                .foregroundColor(.white)
+                .padding(20)
+                .bold()
+                .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.7)]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.white, lineWidth: 2)
+                )
+                .shadow(color: .gray, radius: 5, x: 0, y: 2)
+        }
+    }
+}
+
 struct ContentView: View {
-  @State private var alertIsVisible: Bool = false
   @State private var redColor: Double = 0.0
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  @Environment(\.horizontalSizeClass) var sizeClass
+  
+  private let maxColorValue: Double = 255
+  
   var body: some View {
-
-    VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(.black)
-      VStack {
-        Text("Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-          Text("\(Int(redColor.rounded()))")
+    GeometryReader { geometry in
+      let isLandscape = geometry.size.width > geometry.size.height
+      Group {
+        if isLandscape {
+          landscapeLayout
+        } else {
+          portraitLayout
         }
       }
-      VStack {
-        Text("Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-          Text("\(Int(greenColor.rounded()))")
-        }
-      }
-      VStack {
-        Text("Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-          Text("\(Int(blueColor.rounded()))")
-        }
-      }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
-      }
+      .animation(.easeInOut(duration: 0.3), value: isLandscape)
     }
-    .background(Color.white)
-    .padding(20)
-
+  }
+  
+  private var portraitLayout: some View {
+    VStack {
+      TitleAndRectangleView(foregroundColor: foregroundColor)
+      SliderAndButtonView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, setColor: setColor)
+    }
+  }
+  
+  private var landscapeLayout: some View {
+    HStack {
+      TitleAndRectangleView(foregroundColor: foregroundColor)
+      SliderAndButtonView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, setColor: setColor)
+    }
+  }
+  
+  private func setColor() {
+    foregroundColor = Color(red: redColor / maxColorValue, green: greenColor / maxColorValue, blue: blueColor / maxColorValue)
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    Group {
+      ContentView()
+      
+      ContentView().preferredColorScheme(.dark)
+      
+    }
   }
 }
