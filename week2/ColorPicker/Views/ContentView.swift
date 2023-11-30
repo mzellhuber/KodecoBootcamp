@@ -32,75 +32,6 @@
 
 import SwiftUI
 
-struct ColorSliderView: View {
-  var colorName: String
-  @Binding var colorValue: Double
-  
-  var body: some View {
-    VStack {
-      Text(colorName)
-      HStack {
-        Slider(value: $colorValue, in: 0...255)
-        Text("\(Int(colorValue.rounded()))")
-      }
-    }
-  }
-}
-
-struct TitleAndRectangleView: View {
-  var foregroundColor: Color
-  
-  var body: some View {
-    VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-      
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(Color.primary)
-        .aspectRatio(1.0, contentMode: .fit)
-    }
-  }
-}
-
-struct SliderAndButtonView: View {
-  @Binding var redColor: Double
-  @Binding var greenColor: Double
-  @Binding var blueColor: Double
-  var setColor: () -> Void
-  
-  var body: some View {
-    VStack {
-      ColorSliderView(colorName: "Red", colorValue: $redColor)
-      ColorSliderView(colorName: "Green", colorValue: $greenColor)
-      ColorSliderView(colorName: "Blue", colorValue: $blueColor)
-      
-      SetColorButtonView(action: setColor)
-    }
-    .padding(.horizontal)
-  }
-}
-
-struct SetColorButtonView: View {
-    var action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Text("Set Color")
-                .foregroundColor(.white)
-                .padding(20)
-                .bold()
-                .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.7)]), startPoint: .top, endPoint: .bottom))
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white, lineWidth: 2)
-                )
-                .shadow(color: .gray, radius: 5, x: 0, y: 2)
-        }
-    }
-}
-
 struct ContentView: View {
   @State private var redColor: Double = 0.0
   @State private var greenColor: Double = 0.0
@@ -109,6 +40,7 @@ struct ContentView: View {
   @Environment(\.horizontalSizeClass) var sizeClass
   
   private let maxColorValue: Double = 255
+  private let animationDuration = 0.3
   
   var body: some View {
     GeometryReader { geometry in
@@ -120,7 +52,7 @@ struct ContentView: View {
           portraitLayout
         }
       }
-      .animation(.easeInOut(duration: 0.3), value: isLandscape)
+      .animation(.easeInOut(duration: animationDuration), value: isLandscape)
     }
   }
   
