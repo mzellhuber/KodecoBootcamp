@@ -1,4 +1,4 @@
-# Part 1 - Short-answer Questions
+# Module 1 - Short-answer Questions
 
 ### a) What does the command ‘git status’ output?
 Shows changes in your project.
