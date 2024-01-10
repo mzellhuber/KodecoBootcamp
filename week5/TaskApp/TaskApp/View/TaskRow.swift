@@ -12,23 +12,22 @@ struct TaskRow: View {
 
     var body: some View {
         HStack {
-            Image(systemName: task.isCompleted ? "checkmark.square.fill" : "square")
-                .foregroundColor(task.isCompleted ? .green : .red)
-            VStack(alignment: .leading) {
-                Text(task.title)
-                    .font(.headline)
-                if !task.notes.isEmpty {
-                    Text(task.notes)
-                        .font(.subheadline)
-                }
+            Text(task.title)
+                .bold()
+                .foregroundColor(.blue)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            if task.isCompleted {
+                Image(systemName: "checkmark.square.fill")
+                    .foregroundColor(.green)
+            } else {
+                Image(systemName: "square")
+                    .foregroundColor(.red)
             }
-            Spacer()
         }
-        .padding(.horizontal)
-        .padding(.vertical, 8)
+        .padding()
     }
 }
-
 
 #Preview {
     TaskRow(task: Task(id: UUID(), title: "Test", isCompleted: false, notes: ""))

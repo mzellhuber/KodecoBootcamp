@@ -9,13 +9,37 @@ import SwiftUI
 
 struct TaskListView: View {
     @StateObject var store = TaskStore()
+    @State private var showingNewTaskSheet = false
 
     var body: some View {
         NavigationStack {
-            ForEach(store.tasks) { task in
-                TaskRow(task: task)
+            List {
+                ForEach(store.tasks) { task in
+                    TaskRow(task: task)
+                        .listRowBackground(Color.clear)
+                }
+            }
+            .navigationTitle("My Tasks")
+            .listStyle(PlainListStyle())
+
+            HStack {
+                Button(action: {
+                    showingNewTaskSheet = true
+                }) {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("New Task")
+                    }
+                    .foregroundColor(.blue)
+                    .padding()
+                }
+                .sheet(isPresented: $showingNewTaskSheet) {
+                    NewTaskView(store: store)
+                }
+                Spacer()
             }
         }
+        .background(Color.white)
     }
 }
 
