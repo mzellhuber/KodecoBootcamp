@@ -15,8 +15,10 @@ struct TaskListView: View {
         NavigationStack {
             List {
                 ForEach(store.tasks) { task in
-                    TaskRow(task: task)
-                        .listRowBackground(Color.clear)
+                    NavigationLink(destination: TaskDetailView(task: .constant(task))) {
+                        TaskRow(task: task)
+                    }
+                    .listRowBackground(Color.clear)
                 }
             }
             .navigationTitle("My Tasks")
