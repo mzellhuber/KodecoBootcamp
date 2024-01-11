@@ -13,11 +13,11 @@ struct TaskDetailView: View {
     var body: some View {
         Form {
             Section(header: Text("Task Title")) {
-                Text(task.title)
+                TextField("Title", text: $task.title)
             }
 
             Section(header: Text("Notes")) {
-                Text(task.notes)
+                TextField("Notes", text: $task.notes)
             }
 
             Section {

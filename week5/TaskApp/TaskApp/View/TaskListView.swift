@@ -14,11 +14,10 @@ struct TaskListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(store.tasks) { task in
-                    NavigationLink(destination: TaskDetailView(task: .constant(task))) {
-                        TaskRow(task: task)
+                ForEach(store.tasks.indices, id: \.self) { index in
+                    NavigationLink(destination: TaskDetailView(task: $store.tasks[index])) {
+                        TaskRow(task: store.tasks[index])
                     }
-                    .listRowBackground(Color.clear)
                 }
             }
             .navigationTitle("My Tasks")
