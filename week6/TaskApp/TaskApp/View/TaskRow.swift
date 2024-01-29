@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskRow: View {
-    var task: Task
+    @Binding var task: Task
 
     var body: some View {
         HStack {
@@ -17,18 +17,21 @@ struct TaskRow: View {
                 .foregroundColor(.blue)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            if task.isCompleted {
-                Image(systemName: "checkmark.square.fill")
-                    .foregroundColor(.green)
-            } else {
-                Image(systemName: "square")
-                    .foregroundColor(.red)
-            }
+            Image(systemName: task.isCompleted ? "checkmark.square.fill" : "square")
+                .foregroundColor(task.isCompleted ? .green : .red)
+                .onTapGesture {
+                    withAnimation {
+                        task.isCompleted.toggle()
+                    }
+                }
+                .scaleEffect(task.isCompleted ? 1.2 : 1.0)
         }
         .padding()
     }
 }
 
-#Preview {
-    TaskRow(task: Task(id: UUID(), title: "Test", isCompleted: false, notes: ""))
+struct TaskRow_Previews: PreviewProvider {
+    static var previews: some View {
+        TaskRow(task: .constant(Task(id: UUID(), title: "Test", isCompleted: false, notes: "")))
+    }
 }

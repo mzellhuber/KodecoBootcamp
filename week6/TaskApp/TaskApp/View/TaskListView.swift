@@ -22,10 +22,16 @@ struct TaskListView: View {
 
     var body: some View {
         NavigationStack {
-            List(filteredTasks) { task in
-                if let index = store.tasks.firstIndex(where: { $0.id == task.id }) {
-                    NavigationLink(destination: TaskDetailView(store: store, taskIndex: index)) {
-                        TaskRow(task: task)
+            List {
+                ForEach(store.tasks.indices, id: \.self) { index in
+                    let task = store.tasks[index]
+                    if (task.isCompleted == showCompletedTasks) &&
+                        (searchText.isEmpty || task.title.localizedCaseInsensitiveContains(searchText) ||
+                         (task.notes.localizedCaseInsensitiveContains(searchText))) {
+                        
+                        NavigationLink(destination: TaskDetailView(store: store, taskIndex: index)) {
+                            TaskRow(task: $store.tasks[index])
+                        }
                     }
                 }
             }
