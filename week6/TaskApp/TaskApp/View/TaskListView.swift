@@ -13,13 +13,11 @@ struct TaskListView: View {
 
     var body: some View {
         NavigationStack {
-            List(store.tasks) { task in
-                NavigationLink(destination: TaskDetailView(task: Binding(get: { task }, set: { newTask in
-                    if let index = store.tasks.firstIndex(where: { $0.id == newTask.id }) {
-                        store.tasks[index] = newTask
+            List {
+                ForEach(store.tasks.indices, id: \.self) { index in
+                    NavigationLink(destination: TaskDetailView(task: $store.tasks[index])) {
+                        TaskRow(task: store.tasks[index])
                     }
-                }))) {
-                    TaskRow(task: task)
                 }
             }
             .navigationTitle("My Tasks")
