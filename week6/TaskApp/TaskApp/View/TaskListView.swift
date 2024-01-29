@@ -10,10 +10,15 @@ import SwiftUI
 struct TaskListView: View {
     @StateObject var store = TaskStore()
     @State private var showingNewTaskSheet = false
+    var showCompletedTasks: Bool
+
+    var filteredTasks: [Task] {
+        store.tasks.filter { $0.isCompleted == showCompletedTasks }
+    }
 
     var body: some View {
         NavigationStack {
-            List(store.tasks.filter { !$0.isCompleted }) { task in
+            List(filteredTasks) { task in
                 NavigationLink(destination: TaskDetailView(task: Binding(get: { task }, set: { newTask in
                     if let index = store.tasks.firstIndex(where: { $0.id == newTask.id }) {
                         store.tasks[index] = newTask
@@ -22,24 +27,26 @@ struct TaskListView: View {
                     TaskRow(task: task)
                 }
             }
-            .navigationTitle("My Tasks")
+            .navigationTitle(showCompletedTasks ? "Completed" : "My Tasks")
             .listStyle(PlainListStyle())
 
-            HStack {
-                Button(action: {
-                    showingNewTaskSheet = true
-                }) {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("New Task")
+            if !showCompletedTasks {
+                HStack {
+                    Button(action: {
+                        showingNewTaskSheet = true
+                    }) {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                            Text("New Task")
+                        }
+                        .foregroundColor(.blue)
+                        .padding()
                     }
-                    .foregroundColor(.blue)
-                    .padding()
+                    .sheet(isPresented: $showingNewTaskSheet) {
+                        NewTaskView(store: store)
+                    }
+                    Spacer()
                 }
-                .sheet(isPresented: $showingNewTaskSheet) {
-                    NewTaskView(store: store)
-                }
-                Spacer()
             }
         }
         .background(Color.white)
@@ -48,12 +55,14 @@ struct TaskListView: View {
 
 struct TaskListView_Previews: PreviewProvider {
     static var previews: some View {
-        let mockStore = TaskStore()
-        mockStore.tasks = [
-            Task(id: UUID(), title: "Sample Task 1", isCompleted: false, notes: "This is a note"),
-            Task(id: UUID(), title: "Sample Task 2", isCompleted: true, notes: "Another note")
-        ]
+        Group {
+            let mockStore = TaskStore()
 
-        return TaskListView(store: mockStore)
+            TaskListView(store: mockStore, showCompletedTasks: false)
+                .previewDisplayName("Incomplete Tasks")
+
+            TaskListView(store: mockStore, showCompletedTasks: true)
+                .previewDisplayName("Completed Tasks")
+        }
     }
 }
