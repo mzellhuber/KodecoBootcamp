@@ -12,26 +12,25 @@ struct TaskListView: View {
     let showCompletedTasks: Bool
     @Binding var searchText: String
 
-    var filteredTasks: [Task] {
-        store.tasks.filter { task in
+    var filteredTaskSet: Set<Task> {
+        Set(store.tasks.filter { task in
             (task.isCompleted == showCompletedTasks) &&
             (searchText.isEmpty || task.title.localizedCaseInsensitiveContains(searchText) ||
-             (task.notes.localizedCaseInsensitiveContains(searchText)))
-        }
+             task.notes.localizedCaseInsensitiveContains(searchText))
+        })
     }
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(store.tasks.indices, id: \.self) { index in
-                    let task = store.tasks[index]
-                    if (task.isCompleted == showCompletedTasks) &&
-                        (searchText.isEmpty || task.title.localizedCaseInsensitiveContains(searchText) ||
-                         (task.notes.localizedCaseInsensitiveContains(searchText))) {
-                        
-                        NavigationLink(destination: TaskDetailView(store: store, taskIndex: index)) {
-                            TaskRow(task: $store.tasks[index])
-                        }
+                ForEach(store.tasks.filter { filteredTaskSet.contains($0) }, id: \.self) { task in
+                    if let taskIndex = store.tasks.firstIndex(of: task) {
+                        NavigationLink(
+                            destination: TaskDetailView(store: store, taskIndex: taskIndex),
+                            label: {
+                                TaskRow(task: $store.tasks[taskIndex])
+                            }
+                        )
                     }
                 }
             }
