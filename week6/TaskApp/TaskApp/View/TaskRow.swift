@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TaskRow: View {
     @Binding var task: Task
+    @State private var rotation: Double = 0
+    @State private var scale: CGFloat = 1.0
 
     var body: some View {
         HStack {
@@ -19,12 +21,20 @@ struct TaskRow: View {
 
             Image(systemName: task.isCompleted ? "checkmark.square.fill" : "square")
                 .foregroundColor(task.isCompleted ? .green : .red)
+                .rotationEffect(.degrees(rotation))
+                .scaleEffect(scale)
                 .onTapGesture {
                     withAnimation {
                         task.isCompleted.toggle()
+                        if task.isCompleted {
+                            rotation = 0
+                            scale = 1.5
+                        } else {
+                            rotation = -90
+                            scale = 1.0
+                        }
                     }
                 }
-                .scaleEffect(task.isCompleted ? 1.2 : 1.0)
         }
         .padding()
     }
