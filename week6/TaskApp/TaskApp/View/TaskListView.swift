@@ -11,6 +11,7 @@ struct TaskListView: View {
     @StateObject var store: TaskStore
     let showCompletedTasks: Bool
     @Binding var searchText: String
+    @State private var isAddTaskSheetPresented = false
 
     var filteredTaskSet: Set<Task> {
         Set(store.tasks.filter { task in
@@ -21,7 +22,7 @@ struct TaskListView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 ForEach(store.tasks.filter { filteredTaskSet.contains($0) }, id: \.self) { task in
                     if let taskIndex = store.tasks.firstIndex(of: task) {
@@ -36,6 +37,16 @@ struct TaskListView: View {
             }
             .navigationTitle(showCompletedTasks ? "Completed" : "My Tasks")
             .listStyle(PlainListStyle())
+            .navigationBarItems(
+                trailing: Button(action: {
+                    isAddTaskSheetPresented = true
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                }
+            )
+            .sheet(isPresented: $isAddTaskSheetPresented) {
+                NewTaskView(store: store)
+            }
         }
         .searchable(text: $searchText)
     }
