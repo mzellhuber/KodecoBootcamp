@@ -32,8 +32,8 @@
 
 import Foundation
 
-class HomeworkStore {
-    private var homework: Homework?
+class HomeworkStore: ObservableObject {
+  @Published var homework: Homework?
 
     func loadHomework() {
         if let bundleData = readFromBundle() {

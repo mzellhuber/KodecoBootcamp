@@ -34,9 +34,11 @@ import SwiftUI
 
 @main
 struct AppMain: App {
+  let store = HomeworkStore()
+
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      ListView(store: store)
     }
   }
 }

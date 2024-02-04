@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc.
+/// Copyright (c) 2024 Kodeco Inc.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,15 +31,21 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import Combine
 
-struct ContentView: View {
+struct ListView: View {
+  @ObservedObject var store: HomeworkStore
+  
   var body: some View {
-    Text("Hello World")
+    List(store.homework?.entries ?? []) { entry in
+        Text(entry.api)
+    }
+    .onAppear {
+      store.loadHomework()
+    }
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+  ListView(store: HomeworkStore())
 }
