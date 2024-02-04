@@ -14,6 +14,7 @@
 		2F622B682B6FFEB30060675C /* HomeworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B672B6FFEB30060675C /* HomeworkModel.swift */; };
 		2F622B6A2B6FFF480060675C /* HomeworkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B692B6FFF480060675C /* HomeworkStore.swift */; };
 		2F622B6D2B7003780060675C /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B6C2B7003780060675C /* ListView.swift */; };
+		2F622B6F2B700B500060675C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B6E2B700B500060675C /* DetailView.swift */; };
 		BAF39C2E2AB792B400B18802 /* apilist.json in Resources */ = {isa = PBXBuildFile; fileRef = BAF39C2D2AB792B400B18802 /* apilist.json */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		2F622B672B6FFEB30060675C /* HomeworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkModel.swift; sourceTree = "<group>"; };
 		2F622B692B6FFF480060675C /* HomeworkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkStore.swift; sourceTree = "<group>"; };
 		2F622B6C2B7003780060675C /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		2F622B6E2B700B500060675C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		BAF39C2D2AB792B400B18802 /* apilist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apilist.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				2F622B6C2B7003780060675C /* ListView.swift */,
+				2F622B6E2B700B500060675C /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				2F622B6D2B7003780060675C /* ListView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
 				2F622B682B6FFEB30060675C /* HomeworkModel.swift in Sources */,
+				2F622B6F2B700B500060675C /* DetailView.swift in Sources */,
 				2F622B6A2B6FFF480060675C /* HomeworkStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,7 +342,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Homework7/Preview\\ Content";
-				DEVELOPMENT_TEAM = H5K8CL3D92;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Homework7/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -361,7 +365,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Homework7/Preview\\ Content";
-				DEVELOPMENT_TEAM = H5K8CL3D92;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Homework7/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
