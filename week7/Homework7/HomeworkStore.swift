@@ -31,31 +31,53 @@
 /// THE SOFTWARE.
 
 import Foundation
+import SwiftUI
 
 class HomeworkStore: ObservableObject {
-  @Published var homework: Homework?
+    @Published var homework: Homework?
+    @Published var errorMessage: String?
+
+    init() {
+        loadHomework()
+    }
 
     func loadHomework() {
-        if let bundleData = readFromBundle() {
+        if let documentData = readFromDocuments() {
+            self.homework = documentData
+        } else if let bundleData = readFromBundle() {
             self.homework = bundleData
         } else {
-            // Handle error: File not found
-            print("Error: JSON file not found.")
+            self.errorMessage = "Error: JSON file not found."
         }
+    }
+
+    private func readFromDocuments() -> Homework? {
+        let fileManager = FileManager.default
+        guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        let fileURL = documentDirectory.appendingPathComponent("apilist.json")
+
+        if fileManager.fileExists(atPath: fileURL.path) {
+            do {
+                let data = try Data(contentsOf: fileURL)
+                return try JSONDecoder().decode(Homework.self, from: data)
+            } catch {
+                print("Error reading from documents: \(error)")
+            }
+        }
+        return nil
     }
 
     private func readFromBundle() -> Homework? {
         guard let url = Bundle.main.url(forResource: "apilist", withExtension: "json") else { return nil }
         do {
             let data = try Data(contentsOf: url)
-            let homework = try JSONDecoder().decode(Homework.self, from: data)
-            return homework
+            return try JSONDecoder().decode(Homework.self, from: data)
         } catch {
             print("Error reading from bundle: \(error)")
-            return nil
         }
+        return nil
     }
-
+  
     func saveHomework() {
         guard let homework = homework else { return }
 

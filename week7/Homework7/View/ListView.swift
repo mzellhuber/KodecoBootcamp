@@ -34,35 +34,39 @@ import SwiftUI
 import Combine
 
 struct ListView: View {
-    @ObservedObject var store: HomeworkStore
-
-    var body: some View {
-        NavigationView {
-            List(store.homework?.entries ?? [], id: \.id) { entry in
-                NavigationLink(destination: DetailView(entry: entry)) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(entry.api)
-                                .font(.headline)
-                            Text(entry.description)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
+  @ObservedObject var store: HomeworkStore
+  
+  var body: some View {
+    NavigationView {
+      if let errorMessage = store.errorMessage {
+        Text(errorMessage)
+          .foregroundColor(.red)
+      }
+      List(store.homework?.entries ?? [], id: \.id) { entry in
+        NavigationLink(destination: DetailView(entry: entry)) {
+          HStack {
+            VStack(alignment: .leading) {
+              Text(entry.api)
+                .font(.headline)
+              Text(entry.description)
+                .font(.subheadline)
+                .foregroundColor(.gray)
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("API List")
-            .onAppear {
-                store.loadHomework()
-            }
+          }
         }
+      }
+      .listStyle(InsetGroupedListStyle())
+      .navigationTitle("API List")
+      .onAppear {
+        store.loadHomework()
+      }
     }
+  }
 }
 
 // Preview
 struct ListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListView(store: HomeworkStore())
-    }
+  static var previews: some View {
+    ListView(store: HomeworkStore())
+  }
 }
