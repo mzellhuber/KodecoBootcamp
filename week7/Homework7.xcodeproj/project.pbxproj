@@ -15,6 +15,12 @@
 		2F622B6A2B6FFF480060675C /* HomeworkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B692B6FFF480060675C /* HomeworkStore.swift */; };
 		2F622B6D2B7003780060675C /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B6C2B7003780060675C /* ListView.swift */; };
 		2F622B6F2B700B500060675C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B6E2B700B500060675C /* DetailView.swift */; };
+		2F622B712B7048BE0060675C /* AboveAndBeyond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B702B7048BE0060675C /* AboveAndBeyond.swift */; };
+		2F622B742B704AED0060675C /* week7aboveandbeyond.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F622B732B704AED0060675C /* week7aboveandbeyond.json */; };
+		2F622B772B704B210060675C /* AboveAndBeyondStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B762B704B210060675C /* AboveAndBeyondStore.swift */; };
+		2F622B792B704CCB0060675C /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B782B704CCB0060675C /* UserDataView.swift */; };
+		2F622B7B2B704D0C0060675C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B7A2B704D0C0060675C /* MainView.swift */; };
+		2F622B7F2B70515A0060675C /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F622B7E2B70515A0060675C /* UserDetailView.swift */; };
 		BAF39C2E2AB792B400B18802 /* apilist.json in Resources */ = {isa = PBXBuildFile; fileRef = BAF39C2D2AB792B400B18802 /* apilist.json */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +35,12 @@
 		2F622B692B6FFF480060675C /* HomeworkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkStore.swift; sourceTree = "<group>"; };
 		2F622B6C2B7003780060675C /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		2F622B6E2B700B500060675C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		2F622B702B7048BE0060675C /* AboveAndBeyond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveAndBeyond.swift; sourceTree = "<group>"; };
+		2F622B732B704AED0060675C /* week7aboveandbeyond.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = week7aboveandbeyond.json; sourceTree = "<group>"; };
+		2F622B762B704B210060675C /* AboveAndBeyondStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveAndBeyondStore.swift; sourceTree = "<group>"; };
+		2F622B782B704CCB0060675C /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
+		2F622B7A2B704D0C0060675C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2F622B7E2B70515A0060675C /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 		BAF39C2D2AB792B400B18802 /* apilist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apilist.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,7 +84,8 @@
 				18D775CE22AD944400AE281E /* Info.plist */,
 				18D775C822AD944400AE281E /* Preview Content */,
 				BAF39C2D2AB792B400B18802 /* apilist.json */,
-				2F622B692B6FFF480060675C /* HomeworkStore.swift */,
+				2F622B732B704AED0060675C /* week7aboveandbeyond.json */,
+				2F622B752B704B110060675C /* Data Stores */,
 			);
 			path = Homework7;
 			sourceTree = "<group>";
@@ -88,6 +101,7 @@
 		2F622B662B6FFE3B0060675C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2F622B702B7048BE0060675C /* AboveAndBeyond.swift */,
 				2F622B672B6FFEB30060675C /* HomeworkModel.swift */,
 			);
 			path = Model;
@@ -96,10 +110,38 @@
 		2F622B6B2B70036E0060675C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2F622B7C2B70509A0060675C /* API */,
+				2F622B7D2B70511B0060675C /* User Data */,
+				2F622B7A2B704D0C0060675C /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2F622B752B704B110060675C /* Data Stores */ = {
+			isa = PBXGroup;
+			children = (
+				2F622B692B6FFF480060675C /* HomeworkStore.swift */,
+				2F622B762B704B210060675C /* AboveAndBeyondStore.swift */,
+			);
+			path = "Data Stores";
+			sourceTree = "<group>";
+		};
+		2F622B7C2B70509A0060675C /* API */ = {
+			isa = PBXGroup;
+			children = (
 				2F622B6C2B7003780060675C /* ListView.swift */,
 				2F622B6E2B700B500060675C /* DetailView.swift */,
 			);
-			path = View;
+			path = API;
+			sourceTree = "<group>";
+		};
+		2F622B7D2B70511B0060675C /* User Data */ = {
+			isa = PBXGroup;
+			children = (
+				2F622B782B704CCB0060675C /* UserDataView.swift */,
+				2F622B7E2B70515A0060675C /* UserDetailView.swift */,
+			);
+			path = "User Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */,
+				2F622B742B704AED0060675C /* week7aboveandbeyond.json in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				BAF39C2E2AB792B400B18802 /* apilist.json in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
@@ -198,9 +241,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F622B6D2B7003780060675C /* ListView.swift in Sources */,
+				2F622B7B2B704D0C0060675C /* MainView.swift in Sources */,
+				2F622B792B704CCB0060675C /* UserDataView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
 				2F622B682B6FFEB30060675C /* HomeworkModel.swift in Sources */,
+				2F622B772B704B210060675C /* AboveAndBeyondStore.swift in Sources */,
 				2F622B6F2B700B500060675C /* DetailView.swift in Sources */,
+				2F622B712B7048BE0060675C /* AboveAndBeyond.swift in Sources */,
+				2F622B7F2B70515A0060675C /* UserDetailView.swift in Sources */,
 				2F622B6A2B6FFF480060675C /* HomeworkStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

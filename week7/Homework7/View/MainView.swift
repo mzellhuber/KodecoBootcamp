@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc.
+/// Copyright (c) 2024 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,12 +32,24 @@
 
 import SwiftUI
 
-@main
-struct AppMain: App {
-  
-  var body: some Scene {
-    WindowGroup {
-      MainView()
+struct MainView: View {
+  var body: some View {
+    TabView {
+      ListView(store: HomeworkStore())
+        .tabItem {
+          Label("APIs", systemImage: "list.dash")
+        }
+      
+      UserDataView(store: AboveAndBeyondStore())
+        .tabItem {
+          Label("User Data", systemImage: "person.3.fill")
+        }
     }
+  }
+}
+
+struct MainView_Previews: PreviewProvider {
+  static var previews: some View {
+    MainView()
   }
 }
