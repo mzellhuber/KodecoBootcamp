@@ -36,6 +36,7 @@ import SwiftUI
 class HomeworkStore: ObservableObject {
   @Published var homework: Homework?
   @Published var errorMessage: String?
+  @Published var isLoading = false
   
   init() {
     Task {
@@ -44,25 +45,30 @@ class HomeworkStore: ObservableObject {
   }
   
   func loadHomework() async {
+    await MainActor.run { isLoading = true }
+    defer { Task { @MainActor in self.isLoading = false } }
+    
     do {
       if let networkData = await fetchFromNetwork() {
-        DispatchQueue.main.async {
-          self.homework = networkData
-        }
+        await updateHomework(with: networkData)
       } else if let documentData = readFromDocuments() {
-        DispatchQueue.main.async {
-          self.homework = documentData
-        }
+        await updateHomework(with: documentData)
       } else if let bundleData = readFromBundle() {
-        DispatchQueue.main.async {
-          self.homework = bundleData
-        }
+        await updateHomework(with: bundleData)
       } else {
-        DispatchQueue.main.async {
-          self.errorMessage = "Error: JSON data could not be loaded from any source."
-        }
+        await updateErrorMessage(with: "Error: JSON data could not be loaded from any source.")
       }
     }
+  }
+  
+  @MainActor
+  private func updateHomework(with data: Homework?) {
+    self.homework = data
+  }
+  
+  @MainActor
+  private func updateErrorMessage(with message: String) {
+    self.errorMessage = message
   }
   
   private func readFromDocuments() -> Homework? {
@@ -107,14 +113,16 @@ class HomeworkStore: ObservableObject {
   func saveHomework() {
     guard let homework = homework else { return }
     
-    do {
-      let data = try JSONEncoder().encode(homework)
-      let fileManager = FileManager.default
-      guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-      let fileURL = documentDirectory.appendingPathComponent("apilist.json")
-      try data.write(to: fileURL, options: .atomic)
-    } catch {
-      print("Error saving homework: \(error)")
+    Task {
+      do {
+        let data = try JSONEncoder().encode(homework)
+        let fileManager = FileManager.default
+        guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileURL = documentDirectory.appendingPathComponent("apilist.json")
+        try data.write(to: fileURL, options: .atomic)
+      } catch {
+        print("Error saving homework: \(error)")
+      }
     }
   }
 }

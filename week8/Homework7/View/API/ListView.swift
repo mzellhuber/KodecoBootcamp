@@ -35,13 +35,19 @@ import Combine
 
 struct ListView: View {
     @ObservedObject var store: HomeworkStore
-    
     @State private var showingAlert = false
 
     var body: some View {
         NavigationView {
             Group {
-                if let entries = store.homework?.entries, !entries.isEmpty {
+                if store.isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(2)
+                } else if let errorMessage = store.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                } else if let entries = store.homework?.entries, !entries.isEmpty {
                     List(entries, id: \.id) { entry in
                         NavigationLink(destination: DetailView(entry: entry)) {
                             VStack(alignment: .leading) {
@@ -54,9 +60,6 @@ struct ListView: View {
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
-                } else if store.errorMessage != nil {
-                    Text("An error occurred")
-                        .foregroundColor(.red)
                 } else {
                     Text("Loading data...")
                 }
