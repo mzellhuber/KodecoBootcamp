@@ -1,15 +1,15 @@
 /// Copyright (c) 2024 Kodeco Inc.
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -38,16 +38,30 @@ class HomeworkStore: ObservableObject {
   @Published var errorMessage: String?
   
   init() {
-    loadHomework()
+    Task {
+      await loadHomework()
+    }
   }
   
-  func loadHomework() {
-    if let documentData = readFromDocuments() {
-      self.homework = documentData
-    } else if let bundleData = readFromBundle() {
-      self.homework = bundleData
-    } else {
-      self.errorMessage = "Error: JSON file not found."
+  func loadHomework() async {
+    do {
+      if let networkData = await fetchFromNetwork() {
+        DispatchQueue.main.async {
+          self.homework = networkData
+        }
+      } else if let documentData = readFromDocuments() {
+        DispatchQueue.main.async {
+          self.homework = documentData
+        }
+      } else if let bundleData = readFromBundle() {
+        DispatchQueue.main.async {
+          self.homework = bundleData
+        }
+      } else {
+        DispatchQueue.main.async {
+          self.errorMessage = "Error: JSON data could not be loaded from any source."
+        }
+      }
     }
   }
   
@@ -76,6 +90,18 @@ class HomeworkStore: ObservableObject {
       print("Error reading from bundle: \(error)")
     }
     return nil
+  }
+  
+  private func fetchFromNetwork() async -> Homework? {
+    guard let url = URL(string: "https://api.publicapis.org/entries") else { return nil }
+    do {
+      let (data, _) = try await URLSession.shared.data(from: url)
+      let decodedData = try JSONDecoder().decode(Homework.self, from: data)
+      return decodedData
+    } catch {
+      print("Network request failed with error: \(error)")
+      return nil
+    }
   }
   
   func saveHomework() {

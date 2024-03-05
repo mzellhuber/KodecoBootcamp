@@ -35,14 +35,13 @@ import Combine
 
 struct ListView: View {
     @ObservedObject var store: HomeworkStore
+    
+    @State private var showingAlert = false
 
     var body: some View {
         NavigationView {
             Group {
-                if let errorMessage = store.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                } else if let entries = store.homework?.entries, !entries.isEmpty {
+                if let entries = store.homework?.entries, !entries.isEmpty {
                     List(entries, id: \.id) { entry in
                         NavigationLink(destination: DetailView(entry: entry)) {
                             VStack(alignment: .leading) {
@@ -55,21 +54,34 @@ struct ListView: View {
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
+                } else if store.errorMessage != nil {
+                    Text("An error occurred")
+                        .foregroundColor(.red)
                 } else {
                     Text("Loading data...")
                 }
             }
             .navigationTitle("API List")
             .onAppear {
-                store.loadHomework()
+                Task {
+                    await store.loadHomework()
+                }
             }
+        }
+        .onChange(of: store.errorMessage) { _ in
+            showingAlert = store.errorMessage != nil
+        }
+        .alert("Error", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(store.errorMessage ?? "Unknown error")
         }
     }
 }
 
 // Preview
 struct ListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListView(store: HomeworkStore())
-    }
+  static var previews: some View {
+    ListView(store: HomeworkStore())
+  }
 }
