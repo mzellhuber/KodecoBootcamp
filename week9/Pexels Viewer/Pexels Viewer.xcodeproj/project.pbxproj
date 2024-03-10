@@ -16,6 +16,7 @@
 		2FE4B03A2B9E14EE001D0D62 /* PexelsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0392B9E14EE001D0D62 /* PexelsResponse.swift */; };
 		2FE4B03C2B9E14FC001D0D62 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03B2B9E14FC001D0D62 /* Photo.swift */; };
 		2FE4B03E2B9E150A001D0D62 /* PhotoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03D2B9E150A001D0D62 /* PhotoSource.swift */; };
+		2FE4B0402B9E16F2001D0D62 /* PexelsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03F2B9E16F2001D0D62 /* PexelsStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		2FE4B0392B9E14EE001D0D62 /* PexelsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsResponse.swift; sourceTree = "<group>"; };
 		2FE4B03B2B9E14FC001D0D62 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2FE4B03D2B9E150A001D0D62 /* PhotoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSource.swift; sourceTree = "<group>"; };
+		2FE4B03F2B9E16F2001D0D62 /* PexelsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		2FE4B0332B9D4A99001D0D62 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				2FE4B03F2B9E16F2001D0D62 /* PexelsStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				2FE4B03E2B9E150A001D0D62 /* PhotoSource.swift in Sources */,
 				2FE4B0242B9D4A67001D0D62 /* Pexels_ViewerApp.swift in Sources */,
 				2FE4B0372B9D4CA9001D0D62 /* ConfigManager.swift in Sources */,
+				2FE4B0402B9E16F2001D0D62 /* PexelsStore.swift in Sources */,
 				2FE4B03A2B9E14EE001D0D62 /* PexelsResponse.swift in Sources */,
 				2FE4B03C2B9E14FC001D0D62 /* Photo.swift in Sources */,
 			);
