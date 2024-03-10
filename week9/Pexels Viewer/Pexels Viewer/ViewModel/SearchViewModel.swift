@@ -20,7 +20,7 @@ class SearchViewModel: ObservableObject {
 
     init() {
         $searchQuery
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .sink { [weak self] query in
                 self?.performSearch(query: query)
             }
@@ -30,7 +30,7 @@ class SearchViewModel: ObservableObject {
     private func performSearch(query: String) {
         searchTask?.cancel() 
 
-        guard query.count > 3 else {
+        guard query.count >= 3 else {
             photos = []
             return
         }
