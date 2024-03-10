@@ -13,6 +13,9 @@
 		2FE4B02B2B9D4A69001D0D62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B02A2B9D4A69001D0D62 /* Preview Assets.xcassets */; };
 		2FE4B0352B9D4AE9001D0D62 /* Pexels-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B0342B9D4AE9001D0D62 /* Pexels-Info.plist */; };
 		2FE4B0372B9D4CA9001D0D62 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0362B9D4CA9001D0D62 /* ConfigManager.swift */; };
+		2FE4B03A2B9E14EE001D0D62 /* PexelsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0392B9E14EE001D0D62 /* PexelsResponse.swift */; };
+		2FE4B03C2B9E14FC001D0D62 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03B2B9E14FC001D0D62 /* Photo.swift */; };
+		2FE4B03E2B9E150A001D0D62 /* PhotoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03D2B9E150A001D0D62 /* PhotoSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +26,9 @@
 		2FE4B02A2B9D4A69001D0D62 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2FE4B0342B9D4AE9001D0D62 /* Pexels-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pexels-Info.plist"; sourceTree = "<group>"; };
 		2FE4B0362B9D4CA9001D0D62 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		2FE4B0392B9E14EE001D0D62 /* PexelsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsResponse.swift; sourceTree = "<group>"; };
+		2FE4B03B2B9E14FC001D0D62 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		2FE4B03D2B9E150A001D0D62 /* PhotoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,9 @@
 		2FE4B0312B9D4A90001D0D62 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2FE4B0392B9E14EE001D0D62 /* PexelsResponse.swift */,
+				2FE4B03B2B9E14FC001D0D62 /* Photo.swift */,
+				2FE4B03D2B9E150A001D0D62 /* PhotoSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,8 +186,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FE4B0262B9D4A67001D0D62 /* ContentView.swift in Sources */,
+				2FE4B03E2B9E150A001D0D62 /* PhotoSource.swift in Sources */,
 				2FE4B0242B9D4A67001D0D62 /* Pexels_ViewerApp.swift in Sources */,
 				2FE4B0372B9D4CA9001D0D62 /* ConfigManager.swift in Sources */,
+				2FE4B03A2B9E14EE001D0D62 /* PexelsResponse.swift in Sources */,
+				2FE4B03C2B9E14FC001D0D62 /* Photo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
