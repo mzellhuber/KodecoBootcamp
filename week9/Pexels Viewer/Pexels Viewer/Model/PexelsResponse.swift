@@ -7,18 +7,10 @@
 
 import Foundation
 
+// MARK: - PexelsResponse
 struct PexelsResponse: Codable {
-    let totalResults: Int
-    let page: Int
-    let perPage: Int
+    let page, per_page: Int?
     let photos: [Photo]
-    let nextPage: String
-
-    enum CodingKeys: String, CodingKey {
-        case totalResults = "total_results"
-        case page
-        case perPage = "per_page"
-        case photos
-        case nextPage = "next_page"
-    }
+    let total_results: Int?
+    let next_page: String?
 }

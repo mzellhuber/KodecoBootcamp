@@ -30,6 +30,7 @@ class PexelsStore {
 
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
         return try decoder.decode(PexelsResponse.self, from: data)
     }
 }

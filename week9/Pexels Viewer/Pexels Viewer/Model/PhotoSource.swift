@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct PhotoSource: Codable {
-    let original: String
-    let large2x: String
-    let large: String
-    let medium: String
-    let small: String
-    let portrait: String
-    let landscape: String
-    let tiny: String
+// MARK: - Src
+struct Src: Codable {
+    let original, large2X, large, medium: String
+    let small, portrait, landscape, tiny: String
+
+    enum CodingKeys: String, CodingKey {
+        case original
+        case large2X = "large2x"
+        case large, medium, small, portrait, landscape, tiny
+    }
 }

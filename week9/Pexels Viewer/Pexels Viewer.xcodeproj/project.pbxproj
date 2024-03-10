@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2FE4B0242B9D4A67001D0D62 /* Pexels_ViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0232B9D4A67001D0D62 /* Pexels_ViewerApp.swift */; };
-		2FE4B0262B9D4A67001D0D62 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0252B9D4A67001D0D62 /* ContentView.swift */; };
 		2FE4B0282B9D4A69001D0D62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B0272B9D4A69001D0D62 /* Assets.xcassets */; };
 		2FE4B02B2B9D4A69001D0D62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B02A2B9D4A69001D0D62 /* Preview Assets.xcassets */; };
 		2FE4B0352B9D4AE9001D0D62 /* Pexels-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B0342B9D4AE9001D0D62 /* Pexels-Info.plist */; };
@@ -17,12 +16,14 @@
 		2FE4B03C2B9E14FC001D0D62 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03B2B9E14FC001D0D62 /* Photo.swift */; };
 		2FE4B03E2B9E150A001D0D62 /* PhotoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03D2B9E150A001D0D62 /* PhotoSource.swift */; };
 		2FE4B0402B9E16F2001D0D62 /* PexelsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B03F2B9E16F2001D0D62 /* PexelsStore.swift */; };
+		2FE4B0422B9E190F001D0D62 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0412B9E190F001D0D62 /* SearchView.swift */; };
+		2FE4B0442B9E1924001D0D62 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0432B9E1924001D0D62 /* DetailView.swift */; };
+		2FE4B0472B9E1949001D0D62 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0462B9E1949001D0D62 /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2FE4B0202B9D4A67001D0D62 /* Pexels Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pexels Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FE4B0232B9D4A67001D0D62 /* Pexels_ViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pexels_ViewerApp.swift; sourceTree = "<group>"; };
-		2FE4B0252B9D4A67001D0D62 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2FE4B0272B9D4A69001D0D62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FE4B02A2B9D4A69001D0D62 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2FE4B0342B9D4AE9001D0D62 /* Pexels-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pexels-Info.plist"; sourceTree = "<group>"; };
@@ -31,6 +32,9 @@
 		2FE4B03B2B9E14FC001D0D62 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2FE4B03D2B9E150A001D0D62 /* PhotoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSource.swift; sourceTree = "<group>"; };
 		2FE4B03F2B9E16F2001D0D62 /* PexelsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsStore.swift; sourceTree = "<group>"; };
+		2FE4B0412B9E190F001D0D62 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		2FE4B0432B9E1924001D0D62 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		2FE4B0462B9E1949001D0D62 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		2FE4B0222B9D4A67001D0D62 /* Pexels Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				2FE4B0452B9E193E001D0D62 /* ViewModel */,
 				2FE4B0382B9D4CFC001D0D62 /* Utils */,
 				2FE4B0332B9D4A99001D0D62 /* Store */,
 				2FE4B0322B9D4A95001D0D62 /* View */,
@@ -96,7 +101,8 @@
 		2FE4B0322B9D4A95001D0D62 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2FE4B0252B9D4A67001D0D62 /* ContentView.swift */,
+				2FE4B0412B9E190F001D0D62 /* SearchView.swift */,
+				2FE4B0432B9E1924001D0D62 /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -115,6 +121,14 @@
 				2FE4B0362B9D4CA9001D0D62 /* ConfigManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		2FE4B0452B9E193E001D0D62 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2FE4B0462B9E1949001D0D62 /* SearchViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,11 +202,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FE4B0262B9D4A67001D0D62 /* ContentView.swift in Sources */,
 				2FE4B03E2B9E150A001D0D62 /* PhotoSource.swift in Sources */,
+				2FE4B0442B9E1924001D0D62 /* DetailView.swift in Sources */,
 				2FE4B0242B9D4A67001D0D62 /* Pexels_ViewerApp.swift in Sources */,
 				2FE4B0372B9D4CA9001D0D62 /* ConfigManager.swift in Sources */,
+				2FE4B0422B9E190F001D0D62 /* SearchView.swift in Sources */,
 				2FE4B0402B9E16F2001D0D62 /* PexelsStore.swift in Sources */,
+				2FE4B0472B9E1949001D0D62 /* SearchViewModel.swift in Sources */,
 				2FE4B03A2B9E14EE001D0D62 /* PexelsResponse.swift in Sources */,
 				2FE4B03C2B9E14FC001D0D62 /* Photo.swift in Sources */,
 			);
