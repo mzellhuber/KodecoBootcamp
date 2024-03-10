@@ -12,6 +12,7 @@
 		2FE4B0282B9D4A69001D0D62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B0272B9D4A69001D0D62 /* Assets.xcassets */; };
 		2FE4B02B2B9D4A69001D0D62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B02A2B9D4A69001D0D62 /* Preview Assets.xcassets */; };
 		2FE4B0352B9D4AE9001D0D62 /* Pexels-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE4B0342B9D4AE9001D0D62 /* Pexels-Info.plist */; };
+		2FE4B0372B9D4CA9001D0D62 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE4B0362B9D4CA9001D0D62 /* ConfigManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		2FE4B0272B9D4A69001D0D62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FE4B02A2B9D4A69001D0D62 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2FE4B0342B9D4AE9001D0D62 /* Pexels-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pexels-Info.plist"; sourceTree = "<group>"; };
+		2FE4B0362B9D4CA9001D0D62 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		2FE4B0222B9D4A67001D0D62 /* Pexels Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				2FE4B0382B9D4CFC001D0D62 /* Utils */,
 				2FE4B0332B9D4A99001D0D62 /* Store */,
 				2FE4B0322B9D4A95001D0D62 /* View */,
 				2FE4B0312B9D4A90001D0D62 /* Model */,
@@ -92,6 +95,14 @@
 			children = (
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		2FE4B0382B9D4CFC001D0D62 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2FE4B0362B9D4CA9001D0D62 /* ConfigManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			files = (
 				2FE4B0262B9D4A67001D0D62 /* ContentView.swift in Sources */,
 				2FE4B0242B9D4A67001D0D62 /* Pexels_ViewerApp.swift in Sources */,
+				2FE4B0372B9D4CA9001D0D62 /* ConfigManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
