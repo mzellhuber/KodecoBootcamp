@@ -13,36 +13,47 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Search", text: $viewModel.searchQuery)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                TextField("Search Pexels", text: $viewModel.searchQuery)
+                    .padding(10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
                     .submitLabel(.search)
-                    .onSubmit {
-                        Task {
-                            await viewModel.searchPhotos()
+
+                ScrollView {
+                    HStack(alignment: .top, spacing: 5) {
+                        let columnCount = 2
+                        let rows = Array(repeating: GridItem(.flexible()), count: columnCount)
+                        ForEach(0..<columnCount, id: \.self) { columnIndex in
+                            LazyVStack(spacing: 5) {
+                                ForEach(0..<viewModel.photos.count, id: \.self) { index in
+                                    if index % columnCount == columnIndex {
+                                        let photo = viewModel.photos[index]
+                                        NavigationLink(destination: DetailView(photo: photo)) {
+                                            AsyncImage(url: URL(string: photo.src.medium)) { imagePhase in
+                                                switch imagePhase {
+                                                case .empty:
+                                                    ProgressView()
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(height: 150 * CGFloat(photo.height) / CGFloat(photo.width))
+                                                        .clipped()
+                                                case .failure:
+                                                    Image(systemName: "photo")
+                                                @unknown default:
+                                                    EmptyView()
+                                                }
+                                            }
+                                            .cornerRadius(8)
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
-
-                List(viewModel.photos) { photo in
-                    NavigationLink(destination: DetailView(photo: photo)) {
-                        HStack {
-                            AsyncImage(url: URL(string: photo.src.small)) { image in
-                                image.resizable()
-                            } placeholder: {
-                                ProgressView()
-                            }
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(8)
-
-                            VStack(alignment: .leading) {
-                                Text(photo.photographer)
-                                    .fontWeight(.bold)
-                                Text(photo.alt)
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                    }
+                    .padding(.horizontal)
                 }
             }
             .navigationTitle("Pexels Search")
@@ -50,6 +61,8 @@ struct SearchView: View {
     }
 }
 
-#Preview {
-    SearchView()
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
+    }
 }
