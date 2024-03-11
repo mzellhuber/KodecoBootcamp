@@ -15,7 +15,7 @@ struct DetailView: View {
         ScrollView {
             VStack {
                 Button(action: { showLarge2X.toggle() }) {
-                    Text(showLarge2X ? "1x" : "2x")
+                    Text(showLarge2X ? "Show 1x" : "Show 2x")
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.blue)
