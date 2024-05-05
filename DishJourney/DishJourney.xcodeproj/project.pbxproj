@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F17C3772BE8090E0092FEB9 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F17C3762BE8090E0092FEB9 /* SplashScreenView.swift */; };
 		2FE7907F2BE3FAA900E9ABAD /* DishJourneyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7907E2BE3FAA900E9ABAD /* DishJourneyApp.swift */; };
 		2FE790832BE3FAAA00E9ABAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE790822BE3FAAA00E9ABAD /* Assets.xcassets */; };
 		2FE790862BE3FAAA00E9ABAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE790852BE3FAAA00E9ABAD /* Preview Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F17C3762BE8090E0092FEB9 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		2FE7907B2BE3FAA900E9ABAD /* DishJourney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DishJourney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FE7907E2BE3FAA900E9ABAD /* DishJourneyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishJourneyApp.swift; sourceTree = "<group>"; };
 		2FE790822BE3FAAA00E9ABAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				2FE7909B2BE4A11200E9ABAD /* RecipesView.swift */,
 				2FE7909D2BE4A12800E9ABAD /* TagView.swift */,
 				2FE790A12BE5A9AF00E9ABAD /* ClearableTextField.swift */,
+				2F17C3762BE8090E0092FEB9 /* SplashScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F17C3772BE8090E0092FEB9 /* SplashScreenView.swift in Sources */,
 				2FE7907F2BE3FAA900E9ABAD /* DishJourneyApp.swift in Sources */,
 				2FE790A22BE5A9AF00E9ABAD /* ClearableTextField.swift in Sources */,
 				2FE7909A2BE49E5B00E9ABAD /* ApiService.swift in Sources */,
@@ -334,6 +338,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreenView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -363,6 +368,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreenView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

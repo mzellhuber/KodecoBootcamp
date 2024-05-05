@@ -9,9 +9,20 @@ import SwiftUI
 
 @main
 struct DishJourneyApp: App {
+    @State private var isShowingSplash = true
+
     var body: some Scene {
         WindowGroup {
-            RecipesView()
+            if isShowingSplash {
+                SplashScreenView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            isShowingSplash = false
+                        }
+                    }
+            } else {
+                RecipesView()
+            }
         }
     }
 }
