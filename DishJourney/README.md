@@ -26,3 +26,12 @@ Users will be able to:
 - Mark recipes as favorites using a star or heart icon.
 - Access their favorite recipes quickly from a dedicated tab.
 - Manage and organize their favorite recipes for easy retrieval.
+
+## Animations
+To enhance the overall user experience, We incorporate subtle animations that enrich interaction without overwhelming the user:
+- **Ingredient Tags Animation**: When users add or remove an ingredient, the tags animate with a spring effect, making the interface lively and responsive.
+- **Favorite Icon Toggle**: Toggling the favorite status of recipes features an easeInOut animation, providing a smooth transition that visually confirms the action.
+- **User Notifications/Feedback**: Notifications such as errors or confirmations will appear using a spring animation, ensuring they capture the user's attention effectively.
+
+## Storage Solution
+DishJourney uses **UserDefaults** for storing user preferences and session information like the user's favorite recipes. This lightweight method is suitable for retaining small amounts of data across app launches. For more complex applications with extensive data requirements, a more robust solution like **CoreData** could be used to manage complex object graphs and persistent store capabilities efficiently.
