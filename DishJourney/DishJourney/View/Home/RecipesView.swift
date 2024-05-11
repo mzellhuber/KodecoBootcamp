@@ -16,77 +16,68 @@ struct RecipesView: View {
     @State private var showIngredientWarning = false
 
     var body: some View {
-        VStack {
-            ClearableTextField("Enter ingredients", text: $ingredient, onCommit: {
-                addIngredient()
-            })
-            .padding()
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(ingredients, id: \.self) { item in
-                        TagView(tag: item) {
-                            if let index = ingredients.firstIndex(of: item) {
-                                ingredients.remove(at: index)
+        NavigationView {
+            
+            VStack {
+                ClearableTextField("Enter ingredients", text: $ingredient, onCommit: {
+                    addIngredient()
+                })
+                .padding()
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(ingredients, id: \.self) { item in
+                            TagView(tag: item) {
+                                if let index = ingredients.firstIndex(of: item) {
+                                    ingredients.remove(at: index)
+                                }
                             }
                         }
-                    }
-                }.padding(.horizontal)
-            }
-
-            Button("Fetch Recipes") {
-                if !ingredient.isEmpty && !ingredients.contains(ingredient) {
-                    ingredients.append(ingredient)
-                    ingredient = ""
+                    }.padding(.horizontal)
                 }
                 
-                if !ingredients.isEmpty {
-                    fetchRecipes()
-                    showIngredientWarning = false
-                } else {
-                    showIngredientWarning = true
+                Button("Fetch Recipes") {
+                    if !ingredient.isEmpty && !ingredients.contains(ingredient) {
+                        ingredients.append(ingredient)
+                        ingredient = ""
+                    }
+                    
+                    if !ingredients.isEmpty {
+                        fetchRecipes()
+                        showIngredientWarning = false
+                    } else {
+                        showIngredientWarning = true
+                    }
                 }
-            }
-            .buttonStyle(GradientBackgroundButtonStyle())
-            .padding(.horizontal, 8)
-
-            if showIngredientWarning {
-                Text("Please add at least one ingredient to fetch recipes.")
-                    .foregroundColor(.red)
-                    .padding()
-            }
-
-            ZStack {
-                recipeList
-                if isLoading {
-                    ProgressView()
-                        .opacity(isLoading ? 1 : 0)
+                .buttonStyle(GradientBackgroundButtonStyle())
+                .padding(.horizontal, 8)
+                
+                if showIngredientWarning {
+                    Text("Please add at least one ingredient to fetch recipes.")
+                        .foregroundColor(.red)
+                        .padding()
                 }
-            }
-
-            if let errorMessage = errorMessage {
-                Text(errorMessage)
-                    .foregroundColor(.red)
+                
+                ZStack {
+                    recipeList
+                    if isLoading {
+                        ProgressView()
+                            .opacity(isLoading ? 1 : 0)
+                    }
+                }
+                
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                }
             }
         }
     }
 
     private var recipeList: some View {
         List(recipes, id: \.uri) { recipe in
-            HStack {
-                AsyncImage(url: URL(string: recipe.image)) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 100, height: 100)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                
-                VStack(alignment: .leading) {
-                    Text(recipe.label).font(.headline)
-                    Text(recipe.source).font(.subheadline)
-                }
-                .padding(.leading, 8)
+            NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                RecipeRow(recipe: recipe)
             }
         }
         .listStyle(PlainListStyle())
