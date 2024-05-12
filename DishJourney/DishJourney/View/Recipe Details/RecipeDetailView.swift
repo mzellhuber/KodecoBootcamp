@@ -9,12 +9,13 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     var recipe: Recipe
+    @ObservedObject var favoritesManager = FavoritesManager.shared
 
     var body: some View {
         ScrollView {
             VStack {
-                AsyncImage(url: URL(string: recipe.image)) { image in
-                    image.resizable()
+                AsyncImage(url: URL(string: recipe.image)) {
+                    $0.resizable()
                 } placeholder: {
                     Color.gray.opacity(0.3)
                         .overlay(Text("Loading..."))
@@ -24,20 +25,32 @@ struct RecipeDetailView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal)
                 .shadow(radius: 5)
-
+                
                 VStack(alignment: .leading, spacing: 20) {
-                    Text(recipe.label)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.primary)
-
+                    HStack {
+                        Text(recipe.label)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.primary)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            favoritesManager.toggleFavorite(for: recipe)
+                        }) {
+                            Image(systemName: favoritesManager.isFavorite(recipe: recipe) ? "heart.fill" : "heart")
+                                .foregroundColor(favoritesManager.isFavorite(recipe: recipe) ? .red : .gray)
+                                .animation(.easeInOut, value: favoritesManager.isFavorite(recipe: recipe))
+                        }
+                    }
+                    
                     HStack {
                         DetailChipView(label: "Cuisine", content: recipe.cuisineType.map { $0.rawValue.capitalized }.joined(separator: ", "))
                         DetailChipView(label: "Dish Type", content: recipe.dishType.map { $0.rawValue.capitalized }.joined(separator: ", "))
                     }
-
+                    
                     DetailChipView(label: "Cook Time", content: "\(recipe.totalTime) minutes")
-
+                    
                     CollapsibleSectionView(title: "Ingredients", content: recipe.ingredientLines.map { "• \($0)" }.joined(separator: "\n"))
                     
                     CollapsibleSectionView(
@@ -47,7 +60,7 @@ struct RecipeDetailView: View {
                             return "\($0.label): \(formattedTotal) \($0.unit.rawValue)"
                         }.joined(separator: "\n")
                     )
-
+                    
                     Button("See Full Recipe", action: {
                         if let url = URL(string: recipe.url), UIApplication.shared.canOpenURL(url) {
                             UIApplication.shared.open(url)

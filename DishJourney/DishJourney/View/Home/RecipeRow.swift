@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecipeRow: View {
     var recipe: Recipe
+    @ObservedObject var favoritesManager = FavoritesManager.shared
 
     var body: some View {
         HStack {
@@ -25,6 +26,18 @@ struct RecipeRow: View {
                 Text(recipe.source).font(.subheadline)
             }
             .padding(.leading, 8)
+
+            Spacer()
+
+            Button(action: {
+                favoritesManager.toggleFavorite(for: recipe)
+            }) {
+                Image(systemName: favoritesManager.isFavorite(recipe: recipe) ? "heart.fill" : "heart")
+                    .foregroundColor(favoritesManager.isFavorite(recipe: recipe) ? .red : .gray)
+                    .animation(.easeInOut, value: favoritesManager.isFavorite(recipe: recipe))
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(.trailing, 8)
         }
     }
 }

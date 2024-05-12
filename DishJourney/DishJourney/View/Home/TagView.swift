@@ -15,7 +15,7 @@ struct TagView: View {
         HStack {
             Text(tag)
                 .fontWeight(.semibold)
-                .foregroundColor(.black) 
+                .foregroundColor(.black)
             Button(action: onDelete) {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.gray)
@@ -28,6 +28,7 @@ struct TagView: View {
                 .stroke(Color.gray, lineWidth: 1)
         )
         .cornerRadius(20)
+        .animation(.spring(), value: tag)
     }
 }
 

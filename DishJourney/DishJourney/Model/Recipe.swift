@@ -22,7 +22,8 @@ struct Hit: Codable {
 }
 
 // MARK: - Recipe
-struct Recipe: Codable {
+struct Recipe: Codable, Identifiable {
+    let id = UUID()
     let uri: String
     let label: String
     let image: String
@@ -42,6 +43,14 @@ struct Recipe: Codable {
     let totalNutrients, totalDaily: [String: Total]
     let digest: [Digest]
     let tags: [String]?
+
+    var isFavorite: Bool = false
+}
+
+extension Recipe {
+    enum CodingKeys: String, CodingKey {
+        case uri, label, image, source, url, shareAs, yield, dietLabels, healthLabels, cautions, ingredientLines, ingredients, calories, totalWeight, totalTime, cuisineType, mealType, dishType, totalNutrients, totalDaily, digest, tags
+    }
 }
 
 enum DietLabel: String, Codable {

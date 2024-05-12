@@ -17,47 +17,55 @@ struct RecipesView: View {
 
     var body: some View {
         NavigationView {
-            
             VStack {
                 ClearableTextField("Enter ingredients", text: $ingredient, onCommit: {
                     addIngredient()
                 })
                 .padding()
-                
+
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(ingredients, id: \.self) { item in
                             TagView(tag: item) {
-                                if let index = ingredients.firstIndex(of: item) {
-                                    ingredients.remove(at: index)
+                                withAnimation(.spring()) {
+                                    if let index = ingredients.firstIndex(of: item) {
+                                        ingredients.remove(at: index)
+                                    }
                                 }
                             }
                         }
-                    }.padding(.horizontal)
+                        .transition(.scale)
+                    }
+                    .padding(.horizontal)
                 }
-                
+
                 Button("Fetch Recipes") {
                     if !ingredient.isEmpty && !ingredients.contains(ingredient) {
-                        ingredients.append(ingredient)
-                        ingredient = ""
+                        withAnimation(.spring()) {
+                            ingredients.append(ingredient)
+                            ingredient = ""
+                        }
                     }
                     
                     if !ingredients.isEmpty {
                         fetchRecipes()
                         showIngredientWarning = false
                     } else {
-                        showIngredientWarning = true
+                        withAnimation(.spring()) {
+                            showIngredientWarning = true
+                        }
                     }
                 }
                 .buttonStyle(GradientBackgroundButtonStyle())
                 .padding(.horizontal, 8)
-                
+
                 if showIngredientWarning {
                     Text("Please add at least one ingredient to fetch recipes.")
                         .foregroundColor(.red)
                         .padding()
+                        .transition(.opacity.animation(.spring()))
                 }
-                
+
                 ZStack {
                     recipeList
                     if isLoading {
@@ -65,10 +73,11 @@ struct RecipesView: View {
                             .opacity(isLoading ? 1 : 0)
                     }
                 }
-                
+
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
+                        .transition(.opacity.animation(.spring()))
                 }
             }
         }
@@ -86,8 +95,10 @@ struct RecipesView: View {
     private func addIngredient() {
         let cleanedIngredient = ingredient.trimmingCharacters(in: .whitespacesAndNewlines)
         if !cleanedIngredient.isEmpty && !ingredients.contains(cleanedIngredient) {
-            ingredients.append(cleanedIngredient)
-            ingredient = ""
+            withAnimation(.spring()) {
+                ingredients.append(cleanedIngredient)
+                ingredient = ""
+            }
         }
     }
 
