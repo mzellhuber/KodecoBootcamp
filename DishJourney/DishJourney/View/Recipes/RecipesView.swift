@@ -8,28 +8,23 @@
 import SwiftUI
 
 struct RecipesView: View {
-    @State private var recipes = [Recipe]()
-    @State private var ingredient = ""
-    @State private var ingredients = [String]()
-    @State private var isLoading = false
-    @State private var errorMessage: String?
-    @State private var showIngredientWarning = false
+    @StateObject private var viewModel = RecipesViewModel()
 
     var body: some View {
         NavigationView {
             VStack {
-                ClearableTextField("Enter ingredients", text: $ingredient, onCommit: {
-                    addIngredient()
+                ClearableTextField("Enter ingredients", text: $viewModel.ingredient, onCommit: {
+                    viewModel.addIngredient()
                 })
                 .padding()
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(ingredients, id: \.self) { item in
+                        ForEach(viewModel.ingredients, id: \.self) { item in
                             TagView(tag: item) {
                                 withAnimation(.spring()) {
-                                    if let index = ingredients.firstIndex(of: item) {
-                                        ingredients.remove(at: index)
+                                    if let index = viewModel.ingredients.firstIndex(of: item) {
+                                        viewModel.ingredients.remove(at: index)
                                     }
                                 }
                             }
@@ -40,26 +35,26 @@ struct RecipesView: View {
                 }
 
                 Button("Fetch Recipes") {
-                    if !ingredient.isEmpty && !ingredients.contains(ingredient) {
+                    if !viewModel.ingredient.isEmpty && !viewModel.ingredients.contains(viewModel.ingredient) {
                         withAnimation(.spring()) {
-                            ingredients.append(ingredient)
-                            ingredient = ""
+                            viewModel.ingredients.append(viewModel.ingredient)
+                            viewModel.ingredient = ""
                         }
                     }
                     
-                    if !ingredients.isEmpty {
-                        fetchRecipes()
-                        showIngredientWarning = false
+                    if !viewModel.ingredients.isEmpty {
+                        viewModel.fetchRecipes()
+                        viewModel.showIngredientWarning = false
                     } else {
                         withAnimation(.spring()) {
-                            showIngredientWarning = true
+                            viewModel.showIngredientWarning = true
                         }
                     }
                 }
                 .buttonStyle(GradientBackgroundButtonStyle())
                 .padding(.horizontal, 8)
 
-                if showIngredientWarning {
+                if viewModel.showIngredientWarning {
                     Text("Please add at least one ingredient to fetch recipes.")
                         .foregroundColor(.red)
                         .padding()
@@ -68,13 +63,13 @@ struct RecipesView: View {
 
                 ZStack {
                     recipeList
-                    if isLoading {
+                    if viewModel.isLoading {
                         ProgressView()
-                            .opacity(isLoading ? 1 : 0)
+                            .opacity(viewModel.isLoading ? 1 : 0)
                     }
                 }
 
-                if let errorMessage = errorMessage {
+                if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .transition(.opacity.animation(.spring()))
@@ -84,39 +79,26 @@ struct RecipesView: View {
     }
 
     private var recipeList: some View {
-        List(recipes, id: \.uri) { recipe in
+        List(viewModel.recipes, id: \.uri) { recipe in
             NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                 RecipeRow(recipe: recipe)
             }
         }
         .listStyle(PlainListStyle())
     }
+}
 
-    private func addIngredient() {
-        let cleanedIngredient = ingredient.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !cleanedIngredient.isEmpty && !ingredients.contains(cleanedIngredient) {
-            withAnimation(.spring()) {
-                ingredients.append(cleanedIngredient)
-                ingredient = ""
-            }
-        }
-    }
-
-    private func fetchRecipes() {
-        isLoading = true
-        errorMessage = nil
-        Task {
-            do {
-                let apiService = ApiService()
-                let fetchedRecipes = try await apiService.fetchRecipes(query: ingredients.joined(separator: ", "))
-                recipes = fetchedRecipes
-                if recipes.isEmpty {
-                    errorMessage = "No recipes found. Try different ingredients."
+extension View {
+    func onReachBottom(perform action: @escaping () -> Void) -> some View {
+        self.onAppear {
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("onScroll"), object: nil, queue: .main) { _ in
+                let scrollView = UIScrollView.appearance()
+                let offset = scrollView.contentOffset.y
+                let contentHeight = scrollView.contentSize.height
+                if contentHeight - offset < scrollView.frame.size.height * 2 {
+                    action()
                 }
-            } catch {
-                errorMessage = "Failed to fetch recipes: \(error.localizedDescription)"
             }
-            isLoading = false
         }
     }
 }

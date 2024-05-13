@@ -21,7 +21,7 @@ struct DishJourneyApp: App {
                         }
                     }
             } else {
-                RecipesView()
+                MainView()
             }
         }
     }

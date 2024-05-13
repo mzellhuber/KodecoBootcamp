@@ -36,7 +36,7 @@ struct RecipeDetailView: View {
                         Spacer()
                         
                         Button(action: {
-                            favoritesManager.toggleFavorite(for: recipe)
+                            favoritesManager.toggleFavorite(recipe: recipe)
                         }) {
                             Image(systemName: favoritesManager.isFavorite(recipe: recipe) ? "heart.fill" : "heart")
                                 .foregroundColor(favoritesManager.isFavorite(recipe: recipe) ? .red : .gray)

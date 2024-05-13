@@ -13,6 +13,11 @@
 		2FB5A3AA2BF02C920091B95B /* DetailChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3A92BF02C920091B95B /* DetailChipView.swift */; };
 		2FB5A3AC2BF02CC10091B95B /* CollapsibleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3AB2BF02CC10091B95B /* CollapsibleSectionView.swift */; };
 		2FB5A3AE2BF1811F0091B95B /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3AD2BF1811F0091B95B /* FavoritesManager.swift */; };
+		2FB5A3B02BF186770091B95B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3AF2BF186770091B95B /* MainView.swift */; };
+		2FB5A3B32BF186A20091B95B /* MealPlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3B22BF186A20091B95B /* MealPlannerView.swift */; };
+		2FB5A3B62BF186BA0091B95B /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3B52BF186BA0091B95B /* FavoritesView.swift */; };
+		2FB5A3B82BF18CB00091B95B /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3B72BF18CB00091B95B /* FavoritesViewModel.swift */; };
+		2FB5A3BA2BF193BC0091B95B /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5A3B92BF193BC0091B95B /* RecipesViewModel.swift */; };
 		2FE7907F2BE3FAA900E9ABAD /* DishJourneyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7907E2BE3FAA900E9ABAD /* DishJourneyApp.swift */; };
 		2FE790832BE3FAAA00E9ABAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE790822BE3FAAA00E9ABAD /* Assets.xcassets */; };
 		2FE790862BE3FAAA00E9ABAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE790852BE3FAAA00E9ABAD /* Preview Assets.xcassets */; };
@@ -30,6 +35,11 @@
 		2FB5A3A92BF02C920091B95B /* DetailChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChipView.swift; sourceTree = "<group>"; };
 		2FB5A3AB2BF02CC10091B95B /* CollapsibleSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleSectionView.swift; sourceTree = "<group>"; };
 		2FB5A3AD2BF1811F0091B95B /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		2FB5A3AF2BF186770091B95B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2FB5A3B22BF186A20091B95B /* MealPlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlannerView.swift; sourceTree = "<group>"; };
+		2FB5A3B52BF186BA0091B95B /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		2FB5A3B72BF18CB00091B95B /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		2FB5A3B92BF193BC0091B95B /* RecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
 		2FE7907B2BE3FAA900E9ABAD /* DishJourney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DishJourney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FE7907E2BE3FAA900E9ABAD /* DishJourneyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishJourneyApp.swift; sourceTree = "<group>"; };
 		2FE790822BE3FAAA00E9ABAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,15 +62,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2FB5A3A72BF02C380091B95B /* Home */ = {
+		2FB5A3A72BF02C380091B95B /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				2FB5A3A82BF02C460091B95B /* Recipe Details */,
 				2FB5A3A52BF027010091B95B /* RecipeRow.swift */,
 				2FE7909B2BE4A11200E9ABAD /* RecipesView.swift */,
 				2FE7909D2BE4A12800E9ABAD /* TagView.swift */,
 				2FE790A12BE5A9AF00E9ABAD /* ClearableTextField.swift */,
 			);
-			path = Home;
+			path = Recipes;
 			sourceTree = "<group>";
 		};
 		2FB5A3A82BF02C460091B95B /* Recipe Details */ = {
@@ -71,6 +82,22 @@
 				2FB5A3AB2BF02CC10091B95B /* CollapsibleSectionView.swift */,
 			);
 			path = "Recipe Details";
+			sourceTree = "<group>";
+		};
+		2FB5A3B12BF186910091B95B /* MealPlanner */ = {
+			isa = PBXGroup;
+			children = (
+				2FB5A3B22BF186A20091B95B /* MealPlannerView.swift */,
+			);
+			path = MealPlanner;
+			sourceTree = "<group>";
+		};
+		2FB5A3B42BF186B20091B95B /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				2FB5A3B52BF186BA0091B95B /* FavoritesView.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		2FE790722BE3FAA900E9ABAD = {
@@ -115,9 +142,11 @@
 		2FE7908C2BE3FAB200E9ABAD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2FB5A3A82BF02C460091B95B /* Recipe Details */,
-				2FB5A3A72BF02C380091B95B /* Home */,
+				2FB5A3B42BF186B20091B95B /* Favorites */,
+				2FB5A3B12BF186910091B95B /* MealPlanner */,
+				2FB5A3A72BF02C380091B95B /* Recipes */,
 				2F17C3762BE8090E0092FEB9 /* SplashScreenView.swift */,
+				2FB5A3AF2BF186770091B95B /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -133,6 +162,8 @@
 		2FE7908E2BE3FABF00E9ABAD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2FB5A3B72BF18CB00091B95B /* FavoritesViewModel.swift */,
+				2FB5A3B92BF193BC0091B95B /* RecipesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -224,14 +255,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F17C3772BE8090E0092FEB9 /* SplashScreenView.swift in Sources */,
+				2FB5A3B02BF186770091B95B /* MainView.swift in Sources */,
+				2FB5A3B82BF18CB00091B95B /* FavoritesViewModel.swift in Sources */,
 				2FE7907F2BE3FAA900E9ABAD /* DishJourneyApp.swift in Sources */,
 				2FB5A3A62BF027010091B95B /* RecipeRow.swift in Sources */,
 				2FB5A3AA2BF02C920091B95B /* DetailChipView.swift in Sources */,
+				2FB5A3B62BF186BA0091B95B /* FavoritesView.swift in Sources */,
 				2FE790A22BE5A9AF00E9ABAD /* ClearableTextField.swift in Sources */,
 				2FE7909A2BE49E5B00E9ABAD /* ApiService.swift in Sources */,
+				2FB5A3BA2BF193BC0091B95B /* RecipesViewModel.swift in Sources */,
 				2FE790942BE3FE0200E9ABAD /* Recipe.swift in Sources */,
 				2FB5A3AE2BF1811F0091B95B /* FavoritesManager.swift in Sources */,
 				2FE7909C2BE4A11200E9ABAD /* RecipesView.swift in Sources */,
+				2FB5A3B32BF186A20091B95B /* MealPlannerView.swift in Sources */,
 				2FB5A3AC2BF02CC10091B95B /* CollapsibleSectionView.swift in Sources */,
 				2FE7909E2BE4A12800E9ABAD /* TagView.swift in Sources */,
 				2FB5A3A42BF020460091B95B /* RecipeDetailView.swift in Sources */,

@@ -26,6 +26,10 @@ class ApiService {
             throw NSError(domain: "", code: -2, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch data"])
         }
         
+        if let json = String(data: data, encoding: .utf8) {
+            print("JSON Response: \(json)")
+        }
+
         let decodedResponse = try JSONDecoder().decode(EdamamResponse.self, from: data)
         return decodedResponse.hits.map { $0.recipe }
     }
