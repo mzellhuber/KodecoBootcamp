@@ -66,7 +66,9 @@ struct MealPlannerView: View {
         let dailyRecipes = mealPlan.filter { $0.mealType.contains(mealType) && $0.day == day }
         return Section(header: Text(mealType.rawValue.capitalized)) {
             ForEach(dailyRecipes, id: \.id) { recipe in
-                RecipeRow(recipe: recipe)
+                NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                    RecipeRow(recipe: recipe)
+                }
             }
         }
     }
