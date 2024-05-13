@@ -38,22 +38,21 @@ struct Recipe: Codable, Identifiable {
     let calories, totalWeight: Double
     let totalTime: Int
     let cuisineType: [CuisineType]
-    let mealType: [MealType]
-    let dishType: [DishType]
+    var mealType: [MealType]
+    let dishType: [DishType]?
     let totalNutrients, totalDaily: [String: Total]
     let digest: [Digest]
     let tags: [String]?
-
+    var day: Int = 0
+    
     var isFavorite: Bool = false
-}
 
-extension Recipe {
     enum CodingKeys: String, CodingKey {
         case uri, label, image, source, url, shareAs, yield, dietLabels, healthLabels, cautions, ingredientLines, ingredients, calories, totalWeight, totalTime, cuisineType, mealType, dishType, totalNutrients, totalDaily, digest, tags
     }
 }
 
-enum DietLabel: String, Codable {
+enum DietLabel: String, Codable, CaseIterable {
     case balanced = "Balanced"
     case highFiber = "High-Fiber"
     case highProtein = "High-Protein"
@@ -99,6 +98,7 @@ enum HealthLabel: String, Codable, CaseIterable {
     case vegan = "Vegan"
     case vegetarian = "Vegetarian"
     case wheatFree = "Wheat-Free"
+    case lowwSugar = "Low Sugar"
 }
 
 // MARK: - Digest
@@ -139,7 +139,8 @@ struct Ingredient: Codable {
     let measure: String?
     let food: String
     let weight: Double
-    let foodCategory, foodID: String
+    let foodCategory: String?
+    let foodID: String?
     let image: String?
 
     enum CodingKeys: String, CodingKey {
@@ -173,7 +174,7 @@ enum CuisineType: String, Codable, CaseIterable {
     case world = "world"
 }
 
-enum MealType: String, Codable {
+enum MealType: String, Codable, CaseIterable {
     case breakfast = "breakfast"
     case dinner = "dinner"
     case lunch = "lunch"
@@ -181,6 +182,10 @@ enum MealType: String, Codable {
     case teatime = "teatime"
     case lunchDinner = "lunch/dinner"
     case brunch = "brunch"
+    
+    static var allCases: [MealType] {
+        return [.breakfast, .dinner, .lunch, .snack, .teatime, .brunch]
+    }
 }
 
 enum DishType: String, Codable, CaseIterable {
@@ -201,6 +206,30 @@ enum DishType: String, Codable, CaseIterable {
     case soup = "soup"
     case starter = "starter"
     case sweets = "sweets"
+    case christmas = "christmas"
+    case specialOccasions = "special occasions"
+    case omelet = "omelet"
+    case egg = "egg"
+    case thanksgiving = "thanksgiving"
+    case halloween = "halloween"
+    case unknown
+
+    static var allCases: [DishType] {
+        return [
+            .alcoholCocktail, .biscuitsAndCookies, .bread, .cereals, .condimentsAndSauces, .desserts, .drinks, .mainCourse, .pancake, .preps, .preserve, .salad, .sandwiches, .sideDish, .soup, .starter, .sweets, .christmas, .specialOccasions, .omelet, .egg, .thanksgiving, .halloween
+        ]
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try? container.decode(String.self)
+        self = DishType(rawValue: rawValue ?? "") ?? .unknown
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.rawValue)
+    }
 }
 
 // MARK: - Total

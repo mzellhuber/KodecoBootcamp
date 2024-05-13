@@ -46,7 +46,7 @@ struct RecipeDetailView: View {
                     
                     HStack {
                         DetailChipView(label: "Cuisine", content: recipe.cuisineType.map { $0.rawValue.capitalized }.joined(separator: ", "))
-                        DetailChipView(label: "Dish Type", content: recipe.dishType.map { $0.rawValue.capitalized }.joined(separator: ", "))
+                        DetailChipView(label: "Dish Type", content: recipe.dishType?.map { $0.rawValue.capitalized }.joined(separator: ", ") ?? "N/A")
                     }
                     
                     DetailChipView(label: "Cook Time", content: "\(recipe.totalTime) minutes")
