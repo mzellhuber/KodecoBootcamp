@@ -158,9 +158,11 @@ enum CuisineType: String, Codable, CaseIterable {
     case chinese = "chinese"
     case easternEurope = "eastern europe"
     case french = "french"
+    case greek = "greek"
     case indian = "indian"
     case italian = "italian"
     case japanese = "japanese"
+    case korean = "korean"
     case kosher = "kosher"
     case mediterranean = "mediterranean"
     case mexican = "mexican"
@@ -178,9 +180,11 @@ enum MealType: String, Codable {
     case snack = "snack"
     case teatime = "teatime"
     case lunchDinner = "lunch/dinner"
+    case brunch = "brunch"
 }
 
 enum DishType: String, Codable, CaseIterable {
+    case alcoholCocktail = "alcohol cocktail"
     case biscuitsAndCookies = "biscuits and cookies"
     case bread = "bread"
     case cereals = "cereals"
@@ -197,7 +201,6 @@ enum DishType: String, Codable, CaseIterable {
     case soup = "soup"
     case starter = "starter"
     case sweets = "sweets"
-    case alcoholCocktail = "alcohol cocktail"
 }
 
 // MARK: - Total

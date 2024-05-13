@@ -13,13 +13,9 @@ struct RecipeRow: View {
 
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: recipe.image)) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(width: 100, height: 100)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            CachedImageView(urlString: recipe.image) 
+                .frame(width: 100, height: 100)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
 
             VStack(alignment: .leading) {
                 Text(recipe.label).font(.headline)
