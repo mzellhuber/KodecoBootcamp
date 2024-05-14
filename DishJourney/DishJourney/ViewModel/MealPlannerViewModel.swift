@@ -32,8 +32,6 @@ class MealPlannerViewModel: ObservableObject {
     func fetchMealPlan() {
         Task {
             do {
-                let totalRecipes = numberOfDays * selectedMealTypes.count
-
                 var allRecipes = [Recipe]()
                 
                 // Fetch recipes for each meal type separately
@@ -50,20 +48,8 @@ class MealPlannerViewModel: ObservableObject {
                     allRecipes.append(contentsOf: recipes)
                 }
 
-                // Distribute recipes across days and meal types
-                var distributedRecipes = [Recipe]()
-                for day in 0..<numberOfDays {
-                    for (index, mealType) in selectedMealTypes.enumerated() {
-                        let recipeIndex = (day * selectedMealTypes.count) + index
-                        if recipeIndex < allRecipes.count {
-                            var recipe = allRecipes[recipeIndex]
-                            recipe.day = day
-                            recipe.mealType = [mealType]
-                            distributedRecipes.append(recipe)
-                        }
-                    }
-                }
-
+                let distributedRecipes = distributeRecipes(allRecipes: allRecipes)
+                
                 DispatchQueue.main.async {
                     self.mealPlan = distributedRecipes
                     self.noResults = distributedRecipes.isEmpty
@@ -75,5 +61,21 @@ class MealPlannerViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    private func distributeRecipes(allRecipes: [Recipe]) -> [Recipe] {
+        var distributedRecipes = [Recipe]()
+        for day in 0..<numberOfDays {
+            for (index, mealType) in selectedMealTypes.enumerated() {
+                let recipeIndex = (day * selectedMealTypes.count) + index
+                if recipeIndex < allRecipes.count {
+                    var recipe = allRecipes[recipeIndex]
+                    recipe.day = day
+                    recipe.mealType = [mealType]
+                    distributedRecipes.append(recipe)
+                }
+            }
+        }
+        return distributedRecipes
     }
 }

@@ -25,16 +25,13 @@ struct RecipeDetailView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal)
                 .shadow(radius: 5)
-                
                 VStack(alignment: .leading, spacing: 20) {
                     HStack {
                         Text(recipe.label)
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(Color.primary)
-                        
                         Spacer()
-                        
                         Button(action: {
                             favoritesManager.toggleFavorite(recipe: recipe)
                         }) {
@@ -43,16 +40,12 @@ struct RecipeDetailView: View {
                                 .animation(.easeInOut, value: favoritesManager.isFavorite(recipe: recipe))
                         }
                     }
-                    
                     HStack {
                         DetailChipView(label: "Cuisine", content: recipe.cuisineType.map { $0.rawValue.capitalized }.joined(separator: ", "))
                         DetailChipView(label: "Dish Type", content: recipe.dishType?.map { $0.rawValue.capitalized }.joined(separator: ", ") ?? "N/A")
                     }
-                    
                     DetailChipView(label: "Cook Time", content: "\(recipe.totalTime) minutes")
-                    
                     CollapsibleSectionView(title: "Ingredients", content: recipe.ingredientLines.map { "• \($0)" }.joined(separator: "\n"))
-                    
                     CollapsibleSectionView(
                         title: "Nutritional Information",
                         content: recipe.digest.map {
@@ -60,7 +53,7 @@ struct RecipeDetailView: View {
                             return "\($0.label): \(formattedTotal) \($0.unit.rawValue)"
                         }.joined(separator: "\n")
                     )
-                    
+
                     Button("See Full Recipe", action: {
                         if let url = URL(string: recipe.url), UIApplication.shared.canOpenURL(url) {
                             UIApplication.shared.open(url)
@@ -96,16 +89,38 @@ struct RecipeDetailView_Previews: PreviewProvider {
             healthLabels: [.eggFree, .peanutFree],
             cautions: ["Nuts"],
             ingredientLines: ["2 cups flour", "1 cup sugar", "2 eggs"],
-            ingredients: [Ingredient(text: "1 cup sugar", quantity: 1, measure: "cup", food: "sugar", weight: 200, foodCategory: "sugars", foodID: "12345", image: nil)],
+            ingredients: [
+                Ingredient(
+                text: "1 cup sugar",
+                quantity: 1,
+                measure: "cup",
+                food: "sugar",
+                weight: 200,
+                foodCategory: "sugars",
+                foodID: "12345",
+                image: nil
+                )
+            ],
             calories: 2500,
             totalWeight: 1000,
             totalTime: 45,
             cuisineType: [.american],
             mealType: [.snack],
             dishType: [.desserts],
-            totalNutrients: ["FAT": Total(label: "Fat", quantity: 100, unit: .g)],
-            totalDaily: ["FAT": Total(label: "Fat", quantity: 50, unit: .g)],
-            digest: [Digest(label: "Protein", tag: "PROCNT", schemaOrgTag: .proteinContent, total: 30, hasRDI: true, daily: 60, unit: .g, sub: nil)],
+            totalNutrients: ["FAT": Total(label: "Fat", quantity: 100, unit: .grams)],
+            totalDaily: ["FAT": Total(label: "Fat", quantity: 50, unit: .grams)],
+            digest: [
+                Digest(
+                label: "Protein",
+                tag: "PROCNT",
+                schemaOrgTag: .proteinContent,
+                total: 30,
+                hasRDI: true,
+                daily: 60,
+                unit: .grams,
+                sub: nil
+                )
+            ],
             tags: ["tag1", "tag2"]
         ))
         .previewLayout(.sizeThatFits)

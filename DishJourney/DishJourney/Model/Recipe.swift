@@ -9,11 +9,16 @@ import Foundation
 
 // MARK: - EdamamResponse
 struct EdamamResponse: Codable {
-    let q: String
+    let query: String
     let from, to: Int
     let more: Bool
     let count: Int
     let hits: [Hit]
+
+    enum CodingKeys: String, CodingKey {
+        case query = "q"
+        case from, to, more, count, hits
+    }
 }
 
 // MARK: - Hit
@@ -48,7 +53,9 @@ struct Recipe: Codable, Identifiable {
     var isFavorite: Bool = false
 
     enum CodingKeys: String, CodingKey {
-        case uri, label, image, source, url, shareAs, yield, dietLabels, healthLabels, cautions, ingredientLines, ingredients, calories, totalWeight, totalTime, cuisineType, mealType, dishType, totalNutrients, totalDaily, digest, tags
+        case uri, label, image, source, url, shareAs, yield, dietLabels, healthLabels, 
+             cautions, ingredientLines, ingredients, calories, totalWeight, totalTime,
+             cuisineType, mealType, dishType, totalNutrients, totalDaily, digest, tags
     }
 }
 
@@ -126,7 +133,7 @@ enum SchemaOrgTag: String, Codable {
 
 enum Unit: String, Codable {
     case empty = "%"
-    case g = "g"
+    case grams = "g"
     case kcal = "kcal"
     case mg = "mg"
     case µg = "µg"
@@ -216,7 +223,9 @@ enum DishType: String, Codable, CaseIterable {
 
     static var allCases: [DishType] {
         return [
-            .alcoholCocktail, .biscuitsAndCookies, .bread, .cereals, .condimentsAndSauces, .desserts, .drinks, .mainCourse, .pancake, .preps, .preserve, .salad, .sandwiches, .sideDish, .soup, .starter, .sweets, .christmas, .specialOccasions, .omelet, .egg, .thanksgiving, .halloween
+            .alcoholCocktail, .biscuitsAndCookies, .bread, .cereals, .condimentsAndSauces, .desserts, 
+                .drinks, .mainCourse, .pancake, .preps, .preserve, .salad, .sandwiches, .sideDish,
+                .soup, .starter, .sweets, .christmas, .specialOccasions, .omelet, .egg, .thanksgiving, .halloween
         ]
     }
 
