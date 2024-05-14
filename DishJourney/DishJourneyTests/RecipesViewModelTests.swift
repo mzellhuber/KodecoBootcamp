@@ -1,5 +1,5 @@
 //
-//  FavoritesViewModelTests.swift
+//  RecipesViewModelTests.swift
 //  DishJourneyTests
 //
 //  Created by Melissa Zellhuber on 13/05/24.
@@ -9,62 +9,55 @@ import XCTest
 import Combine
 @testable import DishJourney
 
-class FavoritesViewModelTests: XCTestCase {
-    var viewModel: FavoritesViewModel?
+class RecipesViewModelTests: XCTestCase {
+    var viewModel: RecipesViewModel?
     var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {
         super.setUp()
-        viewModel = FavoritesViewModel()
+        viewModel = RecipesViewModel()
         cancellables = []
-        clearFavorites()
     }
 
     override func tearDown() {
         viewModel = nil
         cancellables = []
-        clearFavorites()
         super.tearDown()
     }
 
-    func testLoadFavorites() {
+    func testAddIngredient() {
         guard let viewModel = viewModel else {
             XCTFail("viewModel should not be nil")
             return
         }
 
-        let expectation = XCTestExpectation(description: "Load favorites")
+        viewModel.ingredient = "Tomato"
+        viewModel.addIngredient()
 
-        FavoritesManager.shared.toggleFavorite(recipe: sampleRecipe)
+        XCTAssertEqual(viewModel.ingredients, ["Tomato"])
+    }
 
-        viewModel.$favorites
-            .sink { favorites in
-                if favorites.contains(where: { $0.label == self.sampleRecipe.label }) {
-                    XCTAssertEqual(favorites.first { $0.label == self.sampleRecipe.label }?.label, self.sampleRecipe.label)
-                    expectation.fulfill()
-                }
+    func testFetchRecipes() {
+        guard let viewModel = viewModel else {
+            XCTFail("viewModel should not be nil")
+            return
+        }
+
+        let expectation = XCTestExpectation(description: "Fetch recipes")
+
+        viewModel.ingredients = ["Tomato"]
+
+        viewModel.$recipes
+            .dropFirst()
+            .sink { recipes in
+                XCTAssertFalse(recipes.isEmpty)
+                expectation.fulfill()
             }
             .store(in: &cancellables)
 
-        wait(for: [expectation], timeout: 1.0)
-    }
+        viewModel.fetchRecipes()
 
-    func testToggleFavorite() {
-        guard let viewModel = viewModel else {
-            XCTFail("viewModel should not be nil")
-            return
-        }
-
-        viewModel.toggleFavorite(sampleRecipe)
-        XCTAssertTrue(viewModel.isFavorite(sampleRecipe))
-
-        viewModel.toggleFavorite(sampleRecipe)
-        XCTAssertFalse(viewModel.isFavorite(sampleRecipe))
-    }
-
-    private func clearFavorites() {
-        let currentFavorites = FavoritesManager.shared.favorites
-        currentFavorites.forEach { FavoritesManager.shared.toggleFavorite(recipe: $0) }
+        wait(for: [expectation], timeout: 5.0)
     }
 
     var sampleRecipe: Recipe {

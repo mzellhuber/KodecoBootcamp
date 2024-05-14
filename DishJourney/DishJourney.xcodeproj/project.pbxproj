@@ -30,6 +30,8 @@
 		2FE7909E2BE4A12800E9ABAD /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7909D2BE4A12800E9ABAD /* TagView.swift */; };
 		2FE790A22BE5A9AF00E9ABAD /* ClearableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE790A12BE5A9AF00E9ABAD /* ClearableTextField.swift */; };
 		2FE820052BF30C26001A095F /* FavoritesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE820042BF30C26001A095F /* FavoritesViewModelTests.swift */; };
+		2FE820072BF30D5F001A095F /* RecipesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE820062BF30D5F001A095F /* RecipesViewModelTests.swift */; };
+		2FE820092BF30EC7001A095F /* MealPlannerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE820082BF30EC7001A095F /* MealPlannerViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		2FE7909D2BE4A12800E9ABAD /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		2FE790A12BE5A9AF00E9ABAD /* ClearableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearableTextField.swift; sourceTree = "<group>"; };
 		2FE820042BF30C26001A095F /* FavoritesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModelTests.swift; sourceTree = "<group>"; };
+		2FE820062BF30D5F001A095F /* RecipesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModelTests.swift; sourceTree = "<group>"; };
+		2FE820082BF30EC7001A095F /* MealPlannerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlannerViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				2FE820042BF30C26001A095F /* FavoritesViewModelTests.swift */,
+				2FE820062BF30D5F001A095F /* RecipesViewModelTests.swift */,
+				2FE820082BF30EC7001A095F /* MealPlannerViewModelTests.swift */,
 			);
 			path = DishJourneyTests;
 			sourceTree = "<group>";
@@ -352,6 +358,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FE820072BF30D5F001A095F /* RecipesViewModelTests.swift in Sources */,
+				2FE820092BF30EC7001A095F /* MealPlannerViewModelTests.swift in Sources */,
 				2FE820052BF30C26001A095F /* FavoritesViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

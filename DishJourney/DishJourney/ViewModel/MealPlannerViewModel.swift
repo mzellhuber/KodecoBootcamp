@@ -27,7 +27,11 @@ class MealPlannerViewModel: ObservableObject {
     @Published var mealPlan: [Recipe]?
     @Published var noResults: Bool = false
 
-    private var apiService = ApiService()
+    var apiService: ApiService
+
+    init(apiService: ApiService = ApiService()) {
+        self.apiService = apiService
+    }
 
     func fetchMealPlan() {
         Task {
@@ -63,7 +67,7 @@ class MealPlannerViewModel: ObservableObject {
         }
     }
 
-    private func distributeRecipes(allRecipes: [Recipe]) -> [Recipe] {
+    func distributeRecipes(allRecipes: [Recipe]) -> [Recipe] {
         var distributedRecipes = [Recipe]()
         for day in 0..<numberOfDays {
             for (index, mealType) in selectedMealTypes.enumerated() {
