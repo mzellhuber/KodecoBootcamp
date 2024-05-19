@@ -53,9 +53,11 @@ struct MealPlannerView: View {
     }
 
     var mealTypeSelector: some View {
-        MultipleSelectionSection(title: "Meal Types",
-                                 options: MealType.allCases,
-                                 selectedOptions: $viewModel.selectedMealTypes)
+        MultipleSelectionSection(
+            title: "Meal Types",
+            options: MealType.allCases,
+            selectedOptions: $viewModel.selectedMealTypes
+        )
     }
 
     @ViewBuilder
@@ -95,9 +97,11 @@ struct MealPlannerView: View {
     }
 
     var healthLabelSelector: some View {
-        MultipleSelectionSection(title: "Health Labels",
-                                 options: HealthLabel.allCases,
-                                 selectedOptions: $viewModel.selectedHealthLabels)
+        MultipleSelectionSection(
+            title: "Health Labels",
+            options: HealthLabel.allCases,
+            selectedOptions: $viewModel.selectedHealthLabels
+        )
     }
 
     var calorieRangeFields: some View {

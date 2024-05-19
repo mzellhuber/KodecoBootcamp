@@ -35,7 +35,10 @@ struct MainView: View {
                 }
             }
             .padding(.top, 8)
-            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 240/255, green: 240/255, blue: 245/255), Color.white]), startPoint: .top, endPoint: .bottom))
+            .background(LinearGradient(gradient: 
+                                        Gradient(colors: [Color(UIColor.secondarySystemBackground), Color(UIColor.systemBackground)]),
+                                       startPoint: .top,
+                                       endPoint: .bottom))
             .cornerRadius(15)
             .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: -4)
             .overlay(
@@ -51,12 +54,16 @@ struct MainView: View {
             withAnimation(.easeInOut) {
                 selectedTab = tab
             }
-        }) {
+        }, label: {
             VStack {
                 ZStack {
                     if selectedTab == tab {
                         Circle()
-                            .fill(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .leading, endPoint: .trailing)) // Color change here
+                            .fill(LinearGradient(
+                                gradient: Gradient(
+                                colors: [Color.blue, Color.purple]),
+                                                 startPoint: .leading,
+                                                 endPoint: .trailing))
                             .frame(width: 40, height: 40)
                             .shadow(radius: 3)
                             .overlay(
@@ -73,7 +80,7 @@ struct MainView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)
-        }
+        })
     }
 }
 

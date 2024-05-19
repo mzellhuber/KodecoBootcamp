@@ -25,13 +25,16 @@ struct RecipeRow: View {
 
             Spacer()
 
-            Button(action: {
-                favoritesManager.toggleFavorite(recipe: recipe)
-            }) {
-                Image(systemName: favoritesManager.isFavorite(recipe: recipe) ? "heart.fill" : "heart")
-                    .foregroundColor(favoritesManager.isFavorite(recipe: recipe) ? .red : .gray)
-                    .animation(.easeInOut, value: favoritesManager.isFavorite(recipe: recipe))
-            }
+            Button(
+                action: {
+                    favoritesManager.toggleFavorite(recipe: recipe)
+                },
+                label: {
+                    Image(systemName: favoritesManager.isFavorite(recipe: recipe) ? "heart.fill" : "heart")
+                        .foregroundColor(favoritesManager.isFavorite(recipe: recipe) ? .red : .gray)
+                        .animation(.easeInOut, value: favoritesManager.isFavorite(recipe: recipe))
+                }
+            )
             .accessibilityIdentifier("FavoriteButton-\(recipe.uri)")
             .buttonStyle(PlainButtonStyle())
             .padding(.trailing, 8)

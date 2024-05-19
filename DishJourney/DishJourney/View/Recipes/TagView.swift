@@ -15,14 +15,14 @@ struct TagView: View {
         HStack {
             Text(tag)
                 .fontWeight(.semibold)
-                .foregroundColor(.black)
+                .foregroundColor(Color.primary)
             Button(action: onDelete) {
                 Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color.secondary)
             }
         }
         .padding(.all, 8)
-        .background(Color.white)
+        .background(Color(UIColor.systemBackground))
         .overlay(
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.gray, lineWidth: 1)

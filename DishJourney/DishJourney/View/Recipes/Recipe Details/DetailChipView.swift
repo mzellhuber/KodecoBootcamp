@@ -12,14 +12,15 @@ struct DetailChipView: View {
     let content: String
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(label).font(.headline).foregroundColor(.secondary)
-            Text(content).font(.subheadline).fontWeight(.medium).foregroundColor(.primary)
+        HStack {
+            Text("\(label):")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .foregroundColor(.secondary)
+            Text(content)
+                .font(.subheadline)
+                .foregroundColor(.primary)
         }
-        .padding()
-        .background(Color(UIColor.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(radius: 2)
     }
 }
 

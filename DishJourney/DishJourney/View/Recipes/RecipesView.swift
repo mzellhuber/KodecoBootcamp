@@ -123,7 +123,10 @@ struct GradientBackgroundButtonStyle: ButtonStyle {
         configuration.label
             .padding()
             .frame(maxWidth: .infinity)
-            .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .leading, endPoint: .trailing))
+            .background(LinearGradient(
+                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                startPoint: .leading,
+                endPoint: .trailing))
             .foregroundColor(.white)
             .cornerRadius(40)
             .shadow(radius: 5)

@@ -11,7 +11,7 @@ import SwiftUI
 class RecipesViewModel: ObservableObject {
     @Published var recipes = [Recipe]()
     @Published var ingredient = ""
-    @Published var ingredients = [String]()
+    @Published var ingredients: [String] = [String]()
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var showIngredientWarning = false
@@ -43,7 +43,10 @@ class RecipesViewModel: ObservableObject {
         Task {
             do {
                 let apiService = ApiService()
-                let fetchedRecipes = try await apiService.fetchRecipes(query: ingredients.joined(separator: ", "), from: fromIndex, to: toIndex)
+                let fetchedRecipes = try await apiService.fetchRecipes(
+                    query: ingredients.joined(separator: ", "),
+                    from: fromIndex,
+                    to: toIndex)
                 DispatchQueue.main.async {
                     self.recipes.append(contentsOf: fetchedRecipes)
                     self.currentPage += 1

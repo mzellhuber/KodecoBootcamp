@@ -40,53 +40,50 @@ class ApiService {
     }
     
     func createMealPlan(query: String, size: Int, dietLabels: [String], healthLabels: [String], mealType: String, calorieMin: Int, calorieMax: Int) async throws -> [Recipe] {
-            let calorieRange = "\(calorieMin)-\(calorieMax)"
-            var urlComponents = URLComponents(string: baseUrl)!
-            
-            var queryItems = [
-                URLQueryItem(name: "q", value: query),
-                URLQueryItem(name: "app_id", value: mealPlanAppId),
-                URLQueryItem(name: "app_key", value: mealPlanAppKey),
-                URLQueryItem(name: "from", value: "0"),
-                URLQueryItem(name: "to", value: String(size)),
-                URLQueryItem(name: "calories", value: calorieRange),
-                URLQueryItem(name: "mealType", value: mealType)
-            ]
-            
-            for dietLabel in dietLabels {
-                queryItems.append(URLQueryItem(name: "diet", value: dietLabel))
-            }
-            
-            for healthLabel in healthLabels {
-                queryItems.append(URLQueryItem(name: "health", value: healthLabel))
-            }
-            
-            urlComponents.queryItems = queryItems
-            
-            guard let url = urlComponents.url else {
-                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
-            }
-            
-            print("Request URL: \(url)")
+        let calorieRange = "\(calorieMin)-\(calorieMax)"
 
-            let (data, response) = try await URLSession.shared.data(from: url)
-            
-            /*
-            if let jsonStr = String(data: data, encoding: .utf8) {
-             print("JSON Response: \(jsonStr)")
-             }
-             */
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                throw NSError(domain: "", code: -2, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch data"])
-            }
-            
-            do {
-                let decodedResponse = try JSONDecoder().decode(EdamamResponse.self, from: data)
-                return decodedResponse.hits.map { $0.recipe }
-            } catch {
-                print("Decoding error: \(error)")
-                throw error
-            }
+        guard var urlComponents = URLComponents(string: baseUrl) else {
+            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid base URL"])
         }
+
+        var queryItems = [
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "app_id", value: mealPlanAppId),
+            URLQueryItem(name: "app_key", value: mealPlanAppKey),
+            URLQueryItem(name: "from", value: "0"),
+            URLQueryItem(name: "to", value: String(size)),
+            URLQueryItem(name: "calories", value: calorieRange),
+            URLQueryItem(name: "mealType", value: mealType)
+        ]
+
+        for dietLabel in dietLabels {
+            queryItems.append(URLQueryItem(name: "diet", value: dietLabel))
+        }
+
+        for healthLabel in healthLabels {
+            queryItems.append(URLQueryItem(name: "health", value: healthLabel))
+        }
+
+        urlComponents.queryItems = queryItems
+
+        guard let url = urlComponents.url else {
+            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
+        }
+
+        print("Request URL: \(url)")
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw NSError(domain: "", code: -2, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch data"])
+        }
+
+        do {
+            let decodedResponse = try JSONDecoder().decode(EdamamResponse.self, from: data)
+            return decodedResponse.hits.map { $0.recipe }
+        } catch {
+            print("Decoding error: \(error)")
+            throw error
+        }
+    }
 }

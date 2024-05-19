@@ -25,7 +25,7 @@ class MealPlannerViewModel: ObservableObject {
     }
     @Published var selectedMealTypes: [MealType] = [.breakfast, .lunch, .dinner]
     @Published var mealPlan: [Recipe]?
-    @Published var noResults: Bool = false
+    @Published var noResults = false
 
     var apiService: ApiService
 
@@ -68,7 +68,7 @@ class MealPlannerViewModel: ObservableObject {
     }
 
     func distributeRecipes(allRecipes: [Recipe]) -> [Recipe] {
-        var distributedRecipes = [Recipe]()
+        var distributedRecipes: [Recipe] = [Recipe]()
         for day in 0..<numberOfDays {
             for (index, mealType) in selectedMealTypes.enumerated() {
                 let recipeIndex = (day * selectedMealTypes.count) + index

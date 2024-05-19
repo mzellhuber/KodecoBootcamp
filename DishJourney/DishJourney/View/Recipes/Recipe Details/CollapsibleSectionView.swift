@@ -9,37 +9,39 @@ import SwiftUI
 
 struct CollapsibleSectionView: View {
     let title: String
-    @State private var isExpanded = false
     let content: String
+
+    @State private var isCollapsed = true
 
     var body: some View {
         VStack(alignment: .leading) {
-            Button(action: {
-                withAnimation {
-                    isExpanded.toggle()
+            Button(
+                action: {
+                    withAnimation {
+                        isCollapsed.toggle()
+                    }
+                },
+                label: {
+                    HStack {
+                        Text(title)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: isCollapsed ? "chevron.down" : "chevron.up")
+                            .foregroundColor(.primary)
+                    }
                 }
-            }) {
-                HStack {
-                    Text(title)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                        .foregroundColor(.primary)
-                }
-                .padding()
-                .background(Color(UIColor.secondarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
-            
-            if isExpanded {
+            )
+            if !isCollapsed {
                 Text(content)
-                    .padding()
-                    .transition(.slide)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .padding(.top, 5)
             }
         }
     }
 }
+
 
 #Preview {
     CollapsibleSectionView(title: "test", content: "test")

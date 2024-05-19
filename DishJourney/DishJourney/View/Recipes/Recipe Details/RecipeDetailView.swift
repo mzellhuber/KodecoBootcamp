@@ -25,12 +25,13 @@ struct RecipeDetailView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal)
                 .shadow(radius: 5)
+
                 VStack(alignment: .leading, spacing: 20) {
                     HStack {
                         Text(recipe.label)
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.primary)
+                            .foregroundColor(.primary)
                         Spacer()
                         Button(action: {
                             favoritesManager.toggleFavorite(recipe: recipe)
@@ -39,12 +40,19 @@ struct RecipeDetailView: View {
                                 .foregroundColor(favoritesManager.isFavorite(recipe: recipe) ? .red : .gray)
                                 .animation(.easeInOut, value: favoritesManager.isFavorite(recipe: recipe))
                         }
+                        .accessibilityIdentifier("LoveButton")
                     }
                     HStack {
-                        DetailChipView(label: "Cuisine", content: recipe.cuisineType.map { $0.rawValue.capitalized }.joined(separator: ", "))
-                        DetailChipView(label: "Dish Type", content: recipe.dishType?.map { $0.rawValue.capitalized }.joined(separator: ", ") ?? "N/A")
+                        DetailChipView(
+                            label: "Cuisine",
+                            content: recipe.cuisineType.map { $0.rawValue.capitalized }.joined(separator: ", "))
+                        DetailChipView(
+                            label: "Dish Type",
+                            content: recipe.dishType?.map { $0.rawValue.capitalized }.joined(separator: ", ") ?? "N/A")
                     }
-                    DetailChipView(label: "Cook Time", content: "\(recipe.totalTime) minutes")
+                    DetailChipView(
+                        label: "Cook Time",
+                        content: "\(recipe.totalTime) minutes")
                     CollapsibleSectionView(title: "Ingredients", content: recipe.ingredientLines.map { "• \($0)" }.joined(separator: "\n"))
                     CollapsibleSectionView(
                         title: "Nutritional Information",
@@ -63,7 +71,7 @@ struct RecipeDetailView: View {
                     .padding(.top, 20)
                 }
                 .padding()
-                .background(Color.white)
+                .background(Color(UIColor.secondarySystemBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .shadow(radius: 5)
                 .padding(.horizontal)

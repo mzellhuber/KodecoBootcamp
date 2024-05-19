@@ -19,11 +19,9 @@ class ImageCache: ObservableObject {
 
     func loadImage() {
         guard let url = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else { return }
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data)
-            }
+            DispatchQueue.main.async { self.image = UIImage(data: data) }
         }.resume()
     }
 }
