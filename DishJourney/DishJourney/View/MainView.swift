@@ -22,13 +22,10 @@ struct MainView: View {
             ZStack {
                 MealPlannerView()
                     .hiddenUnless(.mealPlanner == selectedTab)
-                    .accessibilityIdentifier("MealPlannerView")
                 RecipesView()
                     .hiddenUnless(.home == selectedTab)
-                    .accessibilityIdentifier("RecipesView")
                 FavoritesView()
                     .hiddenUnless(.favorites == selectedTab)
-                    .accessibilityIdentifier("FavoritesView")
             }
 
             HStack {

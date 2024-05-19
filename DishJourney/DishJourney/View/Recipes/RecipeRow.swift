@@ -13,7 +13,7 @@ struct RecipeRow: View {
 
     var body: some View {
         HStack {
-            CachedImageView(urlString: recipe.image) 
+            CachedImageView(urlString: recipe.image)
                 .frame(width: 100, height: 100)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
 
@@ -32,8 +32,10 @@ struct RecipeRow: View {
                     .foregroundColor(favoritesManager.isFavorite(recipe: recipe) ? .red : .gray)
                     .animation(.easeInOut, value: favoritesManager.isFavorite(recipe: recipe))
             }
+            .accessibilityIdentifier("FavoriteButton-\(recipe.uri)")
             .buttonStyle(PlainButtonStyle())
             .padding(.trailing, 8)
         }
+        .accessibilityIdentifier("RecipeRow-\(recipe.uri)")
     }
 }

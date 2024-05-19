@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipesView: View {
     @StateObject private var viewModel = RecipesViewModel()
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -17,7 +17,8 @@ struct RecipesView: View {
                     viewModel.addIngredient()
                 })
                 .padding()
-                
+                .accessibilityIdentifier("SearchField")
+
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(viewModel.ingredients, id: \.self) { item in
@@ -33,7 +34,7 @@ struct RecipesView: View {
                     }
                     .padding(.horizontal)
                 }
-                
+
                 Button("Fetch Recipes") {
                     if !viewModel.ingredient.isEmpty && !viewModel.ingredients.contains(viewModel.ingredient) {
                         withAnimation(.spring()) {
@@ -41,7 +42,7 @@ struct RecipesView: View {
                             viewModel.ingredient = ""
                         }
                     }
-                    
+
                     if !viewModel.ingredients.isEmpty {
                         viewModel.fetchRecipes()
                         viewModel.showIngredientWarning = false
@@ -53,14 +54,15 @@ struct RecipesView: View {
                 }
                 .buttonStyle(GradientBackgroundButtonStyle())
                 .padding(.horizontal, 8)
-                
+                .accessibilityIdentifier("FetchRecipesButton")
+
                 if viewModel.showIngredientWarning {
                     Text("Please add at least one ingredient to fetch recipes.")
                         .foregroundColor(.red)
                         .padding()
                         .transition(.opacity.animation(.spring()))
                 }
-                
+
                 ZStack {
                     recipeList
                     if viewModel.isLoading {
@@ -68,7 +70,7 @@ struct RecipesView: View {
                             .opacity(viewModel.isLoading ? 1 : 0)
                     }
                 }
-                
+
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
@@ -77,12 +79,13 @@ struct RecipesView: View {
             }
         }
     }
-    
+
     private var recipeList: some View {
         List {
             ForEach(viewModel.recipes, id: \.uri) { recipe in
                 NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                     RecipeRow(recipe: recipe)
+                        .accessibilityIdentifier("RecipeRow-\(recipe.uri)")
                 }
             }
             if viewModel.canLoadMoreContent {
