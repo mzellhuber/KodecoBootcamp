@@ -20,14 +20,21 @@ struct MainView: View {
         VStack(spacing: 0) {
             // Content views
             ZStack {
-                MealPlannerView().hiddenUnless(.mealPlanner == selectedTab)
-                RecipesView().hiddenUnless(.home == selectedTab)
-                FavoritesView().hiddenUnless(.favorites == selectedTab)
+                MealPlannerView()
+                    .hiddenUnless(.mealPlanner == selectedTab)
+                    .accessibilityIdentifier("MealPlannerView")
+                RecipesView()
+                    .hiddenUnless(.home == selectedTab)
+                    .accessibilityIdentifier("RecipesView")
+                FavoritesView()
+                    .hiddenUnless(.favorites == selectedTab)
+                    .accessibilityIdentifier("FavoritesView")
             }
 
             HStack {
                 ForEach(Tab.allCases, id: \.self) { tab in
                     tabButton(for: tab)
+                        .accessibilityIdentifier("\(tab.rawValue)TabButton")
                 }
             }
             .padding(.top, 8)
