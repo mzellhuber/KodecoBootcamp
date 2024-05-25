@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct CachedImageView: View {
-    @StateObject private var imageLoader: ImageCache
+  @StateObject private var imageLoader: ImageCache
 
-    init(urlString: String) {
-        _imageLoader = StateObject(wrappedValue: ImageCache(urlString: urlString))
-    }
+  init(urlString: String) {
+    _imageLoader = StateObject(wrappedValue: ImageCache(urlString: urlString))
+  }
 
-    var body: some View {
-        Group {
-            if let image = imageLoader.image {
-                Image(uiImage: image)
-                    .resizable()
-            } else {
-                ProgressView()
-            }
-        }
+  var body: some View {
+    Group {
+      if let image = imageLoader.image {
+        Image(uiImage: image)
+          .resizable()
+      } else {
+        ProgressView()
+      }
     }
+  }
 }

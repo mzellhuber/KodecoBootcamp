@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct DetailChipView: View {
-    let label: String
-    let content: String
+  let label: String
+  let content: String
 
-    var body: some View {
-        HStack {
-            Text("\(label):")
-                .font(.subheadline)
-                .fontWeight(.bold)
-                .foregroundColor(.secondary)
-            Text(content)
-                .font(.subheadline)
-                .foregroundColor(.primary)
-        }
+  var body: some View {
+    HStack {
+      Text("\(label):")
+        .font(.subheadline)
+        .fontWeight(.bold)
+        .foregroundColor(.secondary)
+      Text(content)
+        .font(.subheadline)
+        .foregroundColor(.primary)
     }
+  }
 }
 
 #Preview {
-    DetailChipView(label: "test", content: "test")
+  DetailChipView(label: "test", content: "test")
 }
